@@ -4,8 +4,22 @@
     /* width: 600px; */
 }
 
+.burgerContent{
+    display: 'flex';
+    flex-direction: column;
+    gap: 10;
+}
+
 .framingElement{
     margin-left: 31px;
+}
+
+.framingElement:first-child{
+    margin-bottom: 16px;
+}
+
+.framingElement:last-child{
+    margin-top: 16px;
 }
 
 

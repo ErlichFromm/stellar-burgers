@@ -30,7 +30,7 @@ function findIgredientById(arr, id){
     let ingredient = null;
 
     arr.forEach((element) => {
-        if(element['_id'] == id){
+        if(element['_id'] === id){
             ingredient = element;
             return;
         }
@@ -39,9 +39,9 @@ function findIgredientById(arr, id){
     return ingredient;
 }
 
-const BurgerIngredients = (props) => {
+const BurgerIngredients = ({ingredients}) => {
 
-    const {ingredients} = props;
+    // const {ingredients} = props;
 
     const [selectedTab, setSelectedTab] = useState('bun');
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -61,7 +61,7 @@ const BurgerIngredients = (props) => {
     return (
         <div className={`$ mr-4 ${styles.burgerWrapper}`}>
             <h2 className="text text_type_main-large mt-10">Соберите бургер</h2>
-            <div className="mt-2" style={{display: 'flex'}}>
+            <div className={`mt-2 ${styles.tabWrapper}`}>
                 <Tab value="bun"   active={selectedTab === 'bun'} onClick={setSelectedTab}>Булки</Tab>
                 <Tab value="sauce" active={selectedTab === 'sauce'} onClick={setSelectedTab}>Соусы</Tab>
                 <Tab value="main"  active={selectedTab === 'main'} onClick={setSelectedTab}>Начинки</Tab>
@@ -71,11 +71,11 @@ const BurgerIngredients = (props) => {
             <section className={`mt-10 ${styles.ingredientsSection}`}>
                 <IngredientSection onChange={changeIngredientId} title="Булки" data={groupedIngredients['bun'] ? groupedIngredients['bun'] : []} />
                 <IngredientSection onChange={changeIngredientId} title="Соусы" data={groupedIngredients['sauce'] ? groupedIngredients['sauce'] : []} />
-                <IngredientSection onChange={changeIngredientId} title="Напитки" data={groupedIngredients['main'] ? groupedIngredients['main'] : []} />
+                <IngredientSection onChange={changeIngredientId} title="Начинки" data={groupedIngredients['main'] ? groupedIngredients['main'] : []} />
             </section>
 
-            { selectedIngredientId &&       
-                <Modal title="Детали ингредиента" open={modalIsOpen} onClose={() => {setModalIsOpen(false)}}>
+            {   modalIsOpen &&      
+                <Modal title="Детали ингредиента" onClose={() => {setModalIsOpen(false)}}>
                     <IngredientDetails ingredient={findIgredientById(ingredients, selectedIngredientId)}/>
                 </Modal>
             }

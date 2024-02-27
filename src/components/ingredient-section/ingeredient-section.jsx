@@ -1,22 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from 'prop-types'
 
 import IngredientCard from '../ingredient-card/ingredient-card'
+import {ingredientType} from '../../utils/types'
 import styles from './ingredient-section.module.css'
 
 const IngredientSection = ({title, data, onChange}) => {
+
     return (
         <>
             <section className={styles.wrapper}>
                 <h3 className="text text_type_main-medium">{title}</h3>
-                <div style={{display: 'flex', flexWrap: 'wrap'}}>
+                <div className={styles.ingredientCardList}>
                     {data?.map(ingredient => (
                         <IngredientCard key={ingredient._id} 
-                            image={ingredient.image} 
-                            price={ingredient.price} 
-                            name={ingredient.name}
+                            ingredient={ingredient}
                             onChange={onChange}
-                            id={ingredient._id}
                         />
                     ))}
                 </div>
@@ -27,11 +26,7 @@ const IngredientSection = ({title, data, onChange}) => {
 
 IngredientSection.propTypes = {
     title: PropTypes.string.isRequired,
-    data: PropTypes.arrayOf(PropTypes.shape({
-        _id: PropTypes.string.isRequired,
-        image: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-    })).isRequired,
+    data: PropTypes.arrayOf(ingredientType).isRequired,
     onChange: PropTypes.func.isRequired,
 }
 

@@ -17,6 +17,10 @@
     align-items: center;
 }
 
+.ingredientName{
+    text-align: center;
+}
+
 .counter{
     position: absolute;
     top: 0; right: 10px;

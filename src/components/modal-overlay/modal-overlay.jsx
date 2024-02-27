@@ -1,9 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styles from './modal-overlay.module.css';
 
- const ModalOverlay = () => {
+ const ModalOverlay = ({onClose}) => {
+
+    const onOverlayClickHandler = (e) => {
+        onClose();
+    }
+
     return (
-        <div className={styles.overlay}></div>
+        <div className={styles.overlay} onClick={() => onOverlayClickHandler()}></div>
     )
 }
 
