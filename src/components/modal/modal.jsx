@@ -26,8 +26,10 @@ const Modal = ({title, children, open, onClose}) => {
     }
 
     const onOverlayClickHandler = (e) => {
-        if(e.target.className.includes('modal_modal')){
-            onClose();
+        if(typeof e.target.className == 'string'){
+            if(e.target.className.includes('modal_modal')){
+                onClose();
+            }
         }
     }
 
