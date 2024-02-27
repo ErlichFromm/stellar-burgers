@@ -1,0 +1,14 @@
+.burgerWrapper{
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    padding-bottom: 100px;
+}
+
+.ingredientSection:not(:last-child){
+    margin-bottom: 40px;
+}
+
+.ingredientsSection{
+    overflow-y: auto;
+}

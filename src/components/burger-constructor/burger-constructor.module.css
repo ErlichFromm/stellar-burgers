@@ -1,0 +1,41 @@
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    /* width: 600px; */
+}
+
+.framingElement{
+    margin-left: 31px;
+}
+
+
+.ingredientList{
+    max-height: 660px;
+    overflow-y: auto;
+    padding-right: 16px;
+}
+
+.ingredientListItem{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ingredientListItem:not(:last-child){
+    margin-bottom: 16px;
+}
+
+.constructorElement{
+    width: 100%;
+}
+
+.totalPrice{
+    display: flex;
+    align-items: center;
+}
+
+.confirmation{
+    display: flex;
+    align-items: center;
+    align-self: flex-end;
+}

@@ -1,0 +1,31 @@
+.order{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.number{
+    margin-bottom: 28px;
+    text-shadow: 0 4px 50px #3333FF80, 0 4px 25px #3333FF80 ;
+    font-size: 144px;
+}
+
+.orderImg{
+    width: 155px;
+    height: 155px;
+    margin-bottom: 30px;
+}
+
+.orderImg img{
+    width: 100%;
+}
+
+.orderMessage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.orderMessage:not(:last-child){
+    margin-bottom: 8px;
+}
