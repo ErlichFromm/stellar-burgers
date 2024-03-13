@@ -1,4 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector} from "react-redux";
+import {getIngredients} from '../../services/actions/ingredients'
+
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
@@ -9,31 +14,22 @@ import styles from './app.module.css';
 const ingredientsAPI = 'https://norma.nomoreparties.space/api/ingredients';
 
 const App = () => {
-    const [ingredients, setIngredients] = useState([]);
+    const {ingredients} = useSelector(store => store.ingredients);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        fetch(ingredientsAPI)
-            .then(res => {
-                if(res.ok){
-                    return res.json();
-                }
-                return Promise.reject(`Ошибка получения данных ${res.status}`)
-            })
-            .then(payload => {
-                setIngredients(payload.data);
-            })
-            .catch(error => {
-                console.error(error);
-            })
-            
+        dispatch(getIngredients());
     }, []);
+
 
     return (
         <>
             <AppHeader/>
             <main className={styles.mainWrapper}>
-                <BurgerIngredients ingredients={ingredients}/>
-                <BurgerConstructor/>
+                <DndProvider backend={HTML5Backend}>
+                    <BurgerIngredients ingredients={ingredients}/>
+                    <BurgerConstructor/>
+                </DndProvider>
             </main>
         </>
     );

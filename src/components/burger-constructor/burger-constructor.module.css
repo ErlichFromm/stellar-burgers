@@ -1,55 +1,53 @@
 .wrapper{
     display: flex;
     flex-direction: column;
-    /* width: 600px; */
+    width: 600px;
 }
 
 .burgerContent{
     display: 'flex';
     flex-direction: column;
-    gap: 10;
 }
 
-.framingElement{
-    margin-left: 31px;
+.ingredientPlaceholder{
+    padding: 16px 24px;
+    display: inline-block;
+    border-radius: var(--common-border-radius-s);
+    background: var(--background-element);
+    max-width: 536px;
+    min-height: 80px;
+    width: 100%;
+    font-family: 'Jet Brains Mono';
+    font-size: 16px;
+    line-height: 24px;
+    color: #F2F2F3;
+    flex-grow: 1;
+    box-sizing: border-box;
+
+    text-align: center;
 }
 
-.framingElement:first-child{
-    margin-bottom: 16px;
-}
-
-.framingElement:last-child{
-    margin-top: 16px;
-}
-
-
-.ingredientList{
-    max-height: 660px;
-    overflow-y: auto;
-    padding-right: 16px;
-}
-
-.ingredientListItem{
+.ingredient{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
+    left: -24px;
 }
 
-.ingredientListItem:not(:last-child){
+.ingredient:not(:last-child){
+    margin-bottom: 10px;
+}
+
+.bunPlaceholder_top { border-radius: var(--top-constructor-item-border-radius);}
+.bunPlaceholder_bottom { border-radius: var(--bottom-constructor-item-border-radius);}
+
+.interlayer{
+    overflow-y: scroll;
+    max-height: 740px;
+}
+
+.interlayer > *:not(:last-child){
     margin-bottom: 16px;
 }
 
-.constructorElement{
-    width: 100%;
-}
-
-.totalPrice{
-    display: flex;
-    align-items: center;
-}
-
-.confirmation{
-    display: flex;
-    align-items: center;
-    align-self: flex-end;
-}
