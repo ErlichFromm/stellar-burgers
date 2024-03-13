@@ -1,0 +1,7 @@
+.mainWrapper{
+    display: flex;
+    justify-content: center;
+    max-width: 1920px;
+    margin: 0 auto;
+    max-height: calc(100vh - 90px);
+}

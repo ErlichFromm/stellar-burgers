@@ -1,0 +1,24 @@
+.modal{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+.obsessive{
+    width: 720px;
+    padding: 40px 40px 60px;
+    background-color: #1C1C21;
+    border-radius: 30px;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
