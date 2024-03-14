@@ -27,7 +27,7 @@ const App = () => {
             <AppHeader/>
             <main className={styles.mainWrapper}>
                 <DndProvider backend={HTML5Backend}>
-                    <BurgerIngredients ingredients={ingredients}/>
+                    <BurgerIngredients/>
                     <BurgerConstructor/>
                 </DndProvider>
             </main>

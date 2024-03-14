@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import {CHANGE_TAB} from '../../services/actions/tabs'
 import {GROUPE_INGREDIENTS_BY_TYPE} from '../../services/actions/ingredients'
+import {CLOSE_INGREDIENT_MODAL} from "../../services/actions/modals"
 
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import IngredientSection from "../ingredient-section/ingeredient-section";
@@ -10,8 +11,6 @@ import IngredientDetails from "../ingredient-details/ingredient-details";
 import Modal from "../modal/modal"
 
 import styles from './burger-ingredients.module.css'
-import { ingredientType } from "../../utils/types";
-import PropTypes from 'prop-types';
 
 function findIgredientById(arr, id){
     let ingredient = null;
@@ -26,9 +25,11 @@ function findIgredientById(arr, id){
     return ingredient;
 }
 
-const BurgerIngredients = ({ingredients}) => {
+const BurgerIngredients = () => {
 
     const dispatch = useDispatch();
+
+    const {ingredients} = useSelector(store => store.ingredients)
     const {selectedTab} =  useSelector(store => store.tabs)
     const {ingredientModalIsOpened} = useSelector(store => store.modals)
     const {selectedIngredientId, ingredientsGroupes} = useSelector(store => store.ingredients)
@@ -94,6 +95,10 @@ const BurgerIngredients = ({ingredients}) => {
         dispatch({type: CHANGE_TAB, payload: minOffsetName});
     }
 
+    const closeModalHandler = () => {
+        dispatch({type: CLOSE_INGREDIENT_MODAL});
+    }
+
     return (
         <div className={`$ mr-4 ${styles.burgerWrapper}`}>
             <h2 className="text text_type_main-large mt-10">Соберите бургер</h2>
@@ -111,17 +116,13 @@ const BurgerIngredients = ({ingredients}) => {
             </section>
 
             {   ingredientModalIsOpened &&      
-                <Modal title="Детали ингредиента">
+                <Modal title="Детали ингредиента" onClose={closeModalHandler}>
                     <IngredientDetails ingredient={findIgredientById(ingredients, selectedIngredientId)}/>
                 </Modal>
             }
             
         </div>
     );
-}
-
-BurgerIngredients.propsTypes = {
-    ingredients: PropTypes.arrayOf(ingredientType).isRequired,
 }
 
 export default BurgerIngredients;

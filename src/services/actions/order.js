@@ -1,4 +1,4 @@
-import {orderAPI} from '../../utils/api';
+import {BASE_URL} from '../../utils/api';
 
 export const MAKE_ORDER_INGREDIENT         = "MAKE_ORDER_INGREDIENT";
 export const MAKE_ORDER_INGREDIENT_FAILED  = "MAKE_ORDER_INGREDIENT_FAILED";
@@ -6,7 +6,7 @@ export const MAKE_ORDER_INGREDIENT_SUCCESS = "MAKE_ORDER_INGREDIENT_SUCCESS";
 
 export const makeOrder = (body) => (dispatch) => {
     dispatch({type: MAKE_ORDER_INGREDIENT});
-    fetch(orderAPI, {
+    fetch(`${BASE_URL}/orders`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'

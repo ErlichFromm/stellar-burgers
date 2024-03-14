@@ -4,9 +4,8 @@ import { ConstructorElement} from "@ya.praktikum/react-developer-burger-ui-compo
 import BurgerConstructorIngredient from '../burder-constructor-ingredient/burder-constructor-ingredient'
 
 import { useSelector, useDispatch } from "react-redux";
-import {CALC_INGREDIENT_COST,
-        ADD_INGREDINT, 
-        } from '../../services/actions/ingredients';
+import {CALC_INGREDIENT_COST, addIngredient} from '../../services/actions/ingredients';
+import {CLOSE_ORDER_DETAILS_MODAL} from '../../services/actions/modals';
 
 import Modal from '../modal/modal'
 import OrderDetail from "../orderDetails/order-details";
@@ -24,10 +23,14 @@ const BurgerConstructor = () => {
     const [, dropRef] = useDrop({
         accept: ['bun', 'sauce', 'main'],
         drop(ingredient){
-            dispatch({type: ADD_INGREDINT, payload: ingredient})
+            dispatch(addIngredient(ingredient))
             dispatch({type: CALC_INGREDIENT_COST})
         },
     });
+
+    const closeModalHandler = ()  => {
+        dispatch({type: CLOSE_ORDER_DETAILS_MODAL})
+    }
 
     return (
 
@@ -83,7 +86,7 @@ const BurgerConstructor = () => {
             <TotalCart/>
 
             {orderModalIsOpened && 
-                <Modal>
+                <Modal onClose={closeModalHandler}>
                     <OrderDetail/>
                 </Modal>
             }

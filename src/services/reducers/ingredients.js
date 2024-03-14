@@ -1,4 +1,4 @@
-import {v4 as uuid} from 'uuid'
+
 
 import {GET_INGREDIENT,
         GET_INGREDIENT_FAILED,
@@ -73,23 +73,23 @@ export const ingredientsReducer = (state = initialState, action) => {
         };
         case ADD_INGREDINT: {
 
-            if(action.payload.type === 'bun'){
+            if(action.payload.ingredient.type === 'bun'){
                 return {
                     ...state,
-                    selectedBun: action.payload,
+                    selectedBun: action.payload.ingredient,
                 }
             }
 
-            if(state.selectedIngredients.length == 0){
+            if(state.selectedIngredients.length === 0){
                 return {
                     ...state,
-                    selectedIngredients: [{...action.payload, uuid: uuid()}],
+                    selectedIngredients: [{...action.payload.ingredient, uuid: action.payload.uuid}],
                 }
             }
 
             return {
                 ...state,
-                selectedIngredients: [...state.selectedIngredients, {...action.payload, uuid: uuid()}],
+                selectedIngredients: [...state.selectedIngredients, {...action.payload.ingredient, uuid: action.payload.uuid}],
             }
         };
         case DELETE_INGREDIENT: {

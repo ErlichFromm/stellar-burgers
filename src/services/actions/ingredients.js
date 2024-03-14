@@ -1,4 +1,6 @@
-import {ingredientsAPI} from '../../utils/api'
+import {BASE_URL} from '../../utils/api'
+import {v4 as uuid} from 'uuid'
+import { checkResponce } from '../../utils/check-responce';
 
 export const GET_INGREDIENT         = "GET_INGREDIENT";
 export const GET_INGREDIENT_FAILED  = "GET_INGREDIENT_FAILED";
@@ -16,17 +18,22 @@ export const CALC_INGREDIENT_COST = "CALC_INGREDIENT_COST";
 
 export const getIngredients = () => (dispatch) => {
     dispatch({type: GET_INGREDIENT});
-    fetch(ingredientsAPI)
+    fetch(`${BASE_URL}/ingredients`)
+        .then(res => checkResponce(res))
         .then(res => {
-            if(res.ok){
-                return res.json();
-            }
-            return Promise.reject(`Ошибка получения данных ${res.status}`)
-        })
-        .then(red => {
-            dispatch({type: GET_INGREDIENT_SUCCESS, payload: red.data})
+            dispatch({type: GET_INGREDIENT_SUCCESS, payload: res.data})
         })
         .catch(error => {
             dispatch({type: GET_INGREDIENT_FAILED})
         })
 }
+
+export const addIngredient = (ingredient) => {
+    return {
+        type: ADD_INGREDINT,
+        payload: {
+            ingredient,
+            uuid : uuid(),
+        } 
+    }
+};
