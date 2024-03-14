@@ -40,7 +40,7 @@ const Modal = ({title, children, onClose}) => {
                 </div>
                 
             </div>
-            <ModalOverlay onClick={onClose}/>
+            <ModalOverlay onClose={onClose}/>
         </>
     ), modalRootElement);
 }
