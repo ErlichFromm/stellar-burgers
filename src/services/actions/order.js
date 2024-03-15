@@ -1,4 +1,5 @@
 import {BASE_URL} from '../../utils/api';
+import { checkResponce } from '../../utils/check-responce';
 
 export const MAKE_ORDER_INGREDIENT         = "MAKE_ORDER_INGREDIENT";
 export const MAKE_ORDER_INGREDIENT_FAILED  = "MAKE_ORDER_INGREDIENT_FAILED";
@@ -14,12 +15,7 @@ export const makeOrder = (body) => (dispatch) => {
             body: JSON.stringify(body)
 
         })
-        .then(res => {
-            if(res.ok){
-                return res.json();
-            }
-            return Promise.reject(`Ошибка получения данных ${res.status}`)
-        })
+        .then(res => checkResponce(res))
         .then(res => {
             dispatch({type: MAKE_ORDER_INGREDIENT_SUCCESS, payload: res})
         })
