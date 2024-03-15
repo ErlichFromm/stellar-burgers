@@ -1,0 +1,12 @@
+.totalPrice{
+    display: flex;
+    align-items: center;
+}
+
+.confirmation{
+    display: flex;
+    align-items: center;
+    align-self: flex-end;
+
+    margin-right: 25px;
+}

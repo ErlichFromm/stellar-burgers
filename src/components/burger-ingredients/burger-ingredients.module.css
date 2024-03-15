@@ -16,3 +16,7 @@
 .ingredientsSection{
     overflow-y: auto;
 }
+
+.ingredientsSection > *:not(:last-child){
+    margin-bottom: 40px;
+}

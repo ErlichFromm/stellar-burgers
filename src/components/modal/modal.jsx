@@ -32,7 +32,7 @@ const Modal = ({title, children, onClose}) => {
                 <div className={styles.obsessive}>
                     <header className={styles.header}>
                         <h3 className="text text_type_main-medium">{title}</h3>
-                        <CloseIcon onClick={onClose}/>
+                        <CloseIcon onClick={e => onClose()}/>
                     </header>
                     <div>
                         {children}

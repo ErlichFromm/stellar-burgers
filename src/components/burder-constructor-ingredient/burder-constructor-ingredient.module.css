@@ -1,0 +1,8 @@
+.constructorIngredient{
+    display: flex;
+    align-items: center;
+}
+
+.isDragged{
+    opacity: 0.33;
+}

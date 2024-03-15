@@ -1,53 +1,98 @@
-import React, { useState } from "react";
+import React from "react";
+import { useDrop } from "react-dnd";
+import { ConstructorElement} from "@ya.praktikum/react-developer-burger-ui-components";
+import BurgerConstructorIngredient from '../burder-constructor-ingredient/burder-constructor-ingredient'
 
-import Modal from "../modal/modal";
+import { useSelector, useDispatch } from "react-redux";
+import {CALC_INGREDIENT_COST, addIngredient} from '../../services/actions/ingredients';
+import {CLOSE_ORDER_DETAILS_MODAL} from '../../services/actions/modals';
+
+import Modal from '../modal/modal'
 import OrderDetail from "../orderDetails/order-details";
-import { ConstructorElement, Button, CurrencyIcon, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import {mockFramingElement, mockElementsList} from '../../utils/mock'
+import { TotalCart } from "../total-cart/total-cart";
+
 import styles from './burger-constructor.module.css';
 
 const BurgerConstructor = () => {
-    const [framingElement, setFraminElement] = useState(mockFramingElement);
-    const [elementsList, setElementsList] = useState(mockElementsList);
-    const [modalIsOpened, setModalIsOpened] = useState(false);
+
+    const dispatch = useDispatch();
+    const {selectedBun} = useSelector(store => store.ingredients);
+    const {selectedIngredients} = useSelector(store => store.ingredients);
+    const {orderModalIsOpened} = useSelector(store => store.modals);
+
+    const [, dropRef] = useDrop({
+        accept: ['bun', 'sauce', 'main'],
+        drop(ingredient){
+            dispatch(addIngredient(ingredient))
+            dispatch({type: CALC_INGREDIENT_COST})
+        },
+    });
+
+    const closeModalHandler = ()  => {
+        dispatch({type: CLOSE_ORDER_DETAILS_MODAL})
+    }
 
     return (
-        <section className={`mt-25 ml-10 ${styles.wrapper}`}>
-            <div className={styles.burgerContent}>
-                <ConstructorElement  type="top" isLocked={true} price={framingElement.price} 
-                                     thumbnail={framingElement.image} text={`${framingElement.name} (верх)`}
-                                     extraClass={styles.framingElement} />
-                
-                <div className={styles.ingredientList}>
-                    {elementsList?.map((element, index) => (
-                        <div className={styles.ingredientListItem} key={index}>
-                            <DragIcon type="primary" />
-                            <ConstructorElement  type="undefined" isLocked={false} 
-                                                 price={element.price}  text={element.name} thumbnail={element.image}/>
-                        </div>
-                    ))}
+
+        <section ref={dropRef} className={`${styles.wrapper} pl-10`}>
+            <div className={`mt-25 ${styles.burgerContent}`}>
+                <div className='pl-8 mb-4'>
+                    {selectedBun ?
+                            <ConstructorElement 
+                                type='top' 
+                                isLocked={true} 
+                                price={selectedBun.price} 
+                                thumbnail={selectedBun.image} 
+                                text={`${selectedBun.name} (верх)`}
+                            />
+                        :
+                        <div className={`${styles.ingredientPlaceholder} ${styles.bunPlaceholder_top }`}
+                            >Выберите булку</div>
+                    }
                 </div>
-                                
-                <ConstructorElement  type="bottom" isLocked={true} price={framingElement.price} 
-                        thumbnail={framingElement.image} text={`${framingElement.name} (низ)`}
-                        extraClass={styles.framingElement}/>
+                
+                <div className={`${styles.interlayer} ${selectedIngredients.length === 0 ? 'pl-8' : ''}`}>
+                    {selectedIngredients.length === 0 ? (
+                        <div className={`${styles.ingredientPlaceholder}`}>Выберите начинку</div>
+                    ):(
+                        selectedIngredients.map((ingredient, index) => (
+                            <BurgerConstructorIngredient 
+                                key={ingredient.uuid}
+                                index={index}
+                                ingredient={ingredient}
+                                />
+                        ))
+                    )
+                    }
+                </div>
+                    
+                <div className='pl-8 mt-4'>
+                    {selectedBun ?
+                        <ConstructorElement 
+                            type='bottom' 
+                            isLocked={true} 
+                            price={selectedBun.price} 
+                            thumbnail={selectedBun.image} 
+                            text={`${selectedBun.name} (низ)`}
+                                            
+                        />
+                        :
+                        <div className={`${styles.ingredientPlaceholder} ${styles.bunPlaceholder_bottom }`}
+                            >Выберите булку</div>
+                    }
+                </div>
+                
             </div>
+            <TotalCart/>
 
-            <div className={`mt-10 ${styles.confirmation}`}>
-                <span className={`mr-10 text_type_digits-default ${styles.totalPrice}`}>
-                    <span className="mr-2">610</span>
-                    <CurrencyIcon/>
-                </span>
-                <Button htmlType="button" type="primary" size="medium" onClick={() => {setModalIsOpened(true)}}>Оформить заказ</Button>
-            </div>
-
-
-            { modalIsOpened &&
-            <Modal onClose={() => {setModalIsOpened(false)}}>
-                <OrderDetail/>
-            </Modal>
+            {orderModalIsOpened && 
+                <Modal onClose={closeModalHandler}>
+                    <OrderDetail/>
+                </Modal>
             }
         </section>
+
+
     )
 }  
 
