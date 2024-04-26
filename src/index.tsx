@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-
+import { Provider } from 'react-redux';
+import {store} from './services/store'
 import App from './components/app/app';
 
 //https://norma.nomoreparties.space/api/ingredients
@@ -12,6 +13,8 @@ const root = ReactDOM.createRoot(
 
 
 root.render(
-  <App/>
+  <Provider store={store}>
+    <App/>
+  </Provider>
 );
 

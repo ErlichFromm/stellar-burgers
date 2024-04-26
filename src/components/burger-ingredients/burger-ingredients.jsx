@@ -1,30 +1,16 @@
-import React, {useState, useEffect} from "react";
-import PropTypes from 'prop-types';
+import React, {useEffect, useRef} from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import {CHANGE_TAB} from '../../services/actions/tabs'
+import {GROUPE_INGREDIENTS_BY_TYPE} from '../../services/actions/ingredients'
+import {CLOSE_INGREDIENT_MODAL} from "../../services/actions/modals"
 
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-
 import IngredientSection from "../ingredient-section/ingeredient-section";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import Modal from "../modal/modal"
 
 import styles from './burger-ingredients.module.css'
-
-function sortIngridientsByType(arr){
-
-    const sortedObj = {
-        bun: [],
-        sauce: [],
-        main: []
-    }
-    
-    arr.forEach(ingredient => {
-        if(sortedObj[ingredient.type]){
-            sortedObj[ingredient.type].push(ingredient);
-        }
-    });
-
-    return sortedObj;
-}
 
 function findIgredientById(arr, id){
     let ingredient = null;
@@ -39,53 +25,104 @@ function findIgredientById(arr, id){
     return ingredient;
 }
 
-const BurgerIngredients = ({ingredients}) => {
+const BurgerIngredients = () => {
 
-    // const {ingredients} = props;
+    const dispatch = useDispatch();
 
-    const [selectedTab, setSelectedTab] = useState('bun');
-    const [modalIsOpen, setModalIsOpen] = useState(false);
-    const [selectedIngredientId, setSelectedIngredientId] = useState(null);
+    const {ingredients} = useSelector(store => store.ingredients)
+    const {selectedTab} =  useSelector(store => store.tabs)
+    const {ingredientModalIsOpened} = useSelector(store => store.modals)
+    const {selectedIngredientId, ingredientsGroupes} = useSelector(store => store.ingredients)
 
-    const [groupedIngredients, setGroupedIngredients] = useState({});
+    const tabRef = useRef(null)
+    const bunRef = useRef(null);
+    const sauceRef = useRef(null);
+    const mainRef = useRef(null);
 
     useEffect(() => {
-        setGroupedIngredients(sortIngridientsByType(ingredients));
-    }, [ingredients]);
+        dispatch({type: GROUPE_INGREDIENTS_BY_TYPE, payload: ingredients})
+    }, [dispatch, ingredients]);
 
-    const changeIngredientId = (id) => {
-        setSelectedIngredientId(id);
-        setModalIsOpen(true);
+    const onTabClickHandler = (tabType) => {
+        dispatch({type: CHANGE_TAB, payload: tabType});
+
+        let selectedTabRef = null;
+        switch(tabType){
+            case 'bun': {
+                selectedTabRef = bunRef;
+                break;
+            }
+            case 'sauce': {
+                selectedTabRef = sauceRef;
+                break;
+            }
+            case 'main': {
+                selectedTabRef = mainRef;
+                break;
+            }
+        }
+
+
+        selectedTabRef.current.scrollIntoView({
+            alignToTop: true,
+            behavior: "smooth"
+        });
+    }
+
+    const sectionScrollHandler = (e) => {
+
+        const startPoint  = tabRef.current.getBoundingClientRect().y + tabRef.current.getBoundingClientRect().height;
+        const bunOffset   = bunRef.current.getBoundingClientRect().y;
+        const sauceOffset = sauceRef.current.getBoundingClientRect().y;
+        const mainOffset  = mainRef.current.getBoundingClientRect().y;
+
+        const sectionPositions = {
+            'bun': Math.abs(bunOffset - startPoint),
+            'sauce': Math.abs(sauceOffset - startPoint),
+            'main': Math.abs(mainOffset - startPoint),
+        }
+
+        let minOffsetName = 'bun'
+        let minOffsetValue = sectionPositions['bun'];
+
+        for(let key in sectionPositions){
+            if(sectionPositions[key] < minOffsetValue){
+                minOffsetName = key;
+                minOffsetValue = sectionPositions[key];
+            }
+        }
+
+        dispatch({type: CHANGE_TAB, payload: minOffsetName});
+    }
+
+    const closeModalHandler = () => {
+        dispatch({type: CLOSE_INGREDIENT_MODAL});
     }
 
     return (
         <div className={`$ mr-4 ${styles.burgerWrapper}`}>
             <h2 className="text text_type_main-large mt-10">Соберите бургер</h2>
-            <div className={`mt-2 ${styles.tabWrapper}`}>
-                <Tab value="bun"   active={selectedTab === 'bun'} onClick={setSelectedTab}>Булки</Tab>
-                <Tab value="sauce" active={selectedTab === 'sauce'} onClick={setSelectedTab}>Соусы</Tab>
-                <Tab value="main"  active={selectedTab === 'main'} onClick={setSelectedTab}>Начинки</Tab>
+            <div ref={tabRef} className={`mt-2 ${styles.tabWrapper}`}>
+                <Tab value="bun"   active={selectedTab === 'bun'} onClick={e => onTabClickHandler('bun')}>Булки</Tab>
+                <Tab value="sauce" active={selectedTab === 'sauce'} onClick={e => onTabClickHandler('sauce')}>Соусы</Tab>
+                <Tab value="main"  active={selectedTab === 'main'} onClick={e => onTabClickHandler('main')}>Начинки</Tab>
             </div>
 
             
-            <section className={`mt-10 ${styles.ingredientsSection}`}>
-                <IngredientSection onChange={changeIngredientId} title="Булки" data={groupedIngredients['bun'] ? groupedIngredients['bun'] : []} />
-                <IngredientSection onChange={changeIngredientId} title="Соусы" data={groupedIngredients['sauce'] ? groupedIngredients['sauce'] : []} />
-                <IngredientSection onChange={changeIngredientId} title="Начинки" data={groupedIngredients['main'] ? groupedIngredients['main'] : []} />
+            <section className={`mt-10 ${styles.ingredientsSection}`} onScroll={sectionScrollHandler}>
+                <div ref={bunRef}><IngredientSection title="Булки" data={ingredientsGroupes['bun'] ? ingredientsGroupes['bun'] : []} /></div>
+                <div ref={sauceRef}><IngredientSection title="Соусы" data={ingredientsGroupes['sauce'] ? ingredientsGroupes['sauce'] : []} /></div>
+                <div ref={mainRef}><IngredientSection title="Начинки" data={ingredientsGroupes['main'] ? ingredientsGroupes['main'] : []} /></div>
             </section>
 
-            {   modalIsOpen &&      
-                <Modal title="Детали ингредиента" onClose={() => {setModalIsOpen(false)}}>
+            {   ingredientModalIsOpened &&      
+                <Modal title="Детали ингредиента" onClose={closeModalHandler}>
                     <IngredientDetails ingredient={findIgredientById(ingredients, selectedIngredientId)}/>
                 </Modal>
             }
             
         </div>
     );
-}
-
-BurgerIngredients.propsTypes = {
-    ingredients: PropTypes.array.isRequired,
 }
 
 export default BurgerIngredients;

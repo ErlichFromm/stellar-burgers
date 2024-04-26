@@ -5,7 +5,7 @@ import IngredientCard from '../ingredient-card/ingredient-card'
 import {ingredientType} from '../../utils/types'
 import styles from './ingredient-section.module.css'
 
-const IngredientSection = ({title, data, onChange}) => {
+const IngredientSection = ({title, data}) => {
 
     return (
         <>
@@ -15,7 +15,6 @@ const IngredientSection = ({title, data, onChange}) => {
                     {data?.map(ingredient => (
                         <IngredientCard key={ingredient._id} 
                             ingredient={ingredient}
-                            onChange={onChange}
                         />
                     ))}
                 </div>
@@ -27,7 +26,6 @@ const IngredientSection = ({title, data, onChange}) => {
 IngredientSection.propTypes = {
     title: PropTypes.string.isRequired,
     data: PropTypes.arrayOf(ingredientType).isRequired,
-    onChange: PropTypes.func.isRequired,
 }
 
 export default IngredientSection;
