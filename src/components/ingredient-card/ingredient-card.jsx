@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useDrag } from "react-dnd";
+import { Link, useLocation} from 'react-router-dom';
 
 import { useDispatch, useSelector } from "react-redux";
 import {SET_SELECTED_INGREDIENT_ID} from "../../services/actions/ingredients"
@@ -14,6 +15,7 @@ import styles from "./ingredient-card.module.css"
 const IngredientCard = ({ingredient}) => {
 
     const dispatch = useDispatch();
+    const location = useLocation();
     const {selectedIngredients, selectedBun} = useSelector(store => store.ingredients);
     
     const [ingredienCount, setIngredientCount] = useState(0);
@@ -44,9 +46,10 @@ const IngredientCard = ({ingredient}) => {
     }, [selectedBun, selectedIngredients])
     
     return (
-        <div id={ingredient._id} 
+        <Link id={ingredient._id} 
+             to={`/ingredients/${ingredient._id}`}
+             state={{backgound: location}}
              className={styles.card} 
-             onClick={e => onIngredientCardClickHandler(ingredient._id)}
              ref={dragRef}>
 
             <div className="pl-4 pr-4">
@@ -64,7 +67,7 @@ const IngredientCard = ({ingredient}) => {
             ):(
                 <></>
             )}
-        </div>
+        </Link>
     );
 }
 
