@@ -1,20 +1,14 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector} from "react-redux";
-import {getIngredients} from '../../services/actions/ingredients'
+import { useDispatch } from "react-redux";
+import { Routes, Route } from 'react-router-dom';
+import { getIngredients } from '../../services/actions/ingredients'
 
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
+import Layout from "../layout/layout";
+import { Home, SignIn } from '../../pages';
 
-import AppHeader from '../app-header/app-header';
-import BurgerIngredients from '../burger-ingredients/burger-ingredients';
-import BurgerConstructor from '../burger-constructor/burger-constructor';
 
-import styles from './app.module.css';
-
-const ingredientsAPI = 'https://norma.nomoreparties.space/api/ingredients';
 
 const App = () => {
-    const {ingredients} = useSelector(store => store.ingredients);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -24,13 +18,11 @@ const App = () => {
 
     return (
         <>
-            <AppHeader/>
-            <main className={styles.mainWrapper}>
-                <DndProvider backend={HTML5Backend}>
-                    <BurgerIngredients/>
-                    <BurgerConstructor/>
-                </DndProvider>
-            </main>
+            <Routes>
+                <Route path="/" element={<Layout/>}>
+                    <Route index element={<Home />}></Route>
+                </Route>
+            </Routes>
         </>
     );
 }
