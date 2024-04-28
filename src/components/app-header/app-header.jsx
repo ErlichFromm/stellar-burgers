@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useEffect} from "react";
+import { useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 import { BurgerIcon, ListIcon, ProfileIcon, Logo } from "@ya.praktikum/react-developer-burger-ui-components";
 
@@ -7,6 +8,9 @@ import styles from './app-header.module.css';
 const setActive = ({ isActive }) => isActive ? styles.active : styles.link;
 
 const AppHeader = () => {
+
+    const {user, isAuth} = useSelector(state => state.user);
+
     return (
         <header className={styles.header}>
             <div className={styles.wrapper}>
@@ -39,7 +43,13 @@ const AppHeader = () => {
                     className={setActive}
                 >
                     <ProfileIcon type="secondary" />
-                    <span className="text  text_type_main-small text_color_inactive ml-2">Личный кабинет</span>
+                    <span className="text  text_type_main-small text_color_inactive ml-2">
+                        {isAuth ? (
+                            <span>{user.name}</span>
+                        ) : (
+                            <span>Личный кабинет</span>
+                        )}
+                    </span>
                 </NavLink>
             </div>
         </header>

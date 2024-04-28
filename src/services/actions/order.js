@@ -1,4 +1,4 @@
-import {BASE_URL} from '../../utils/api';
+import {BASE_URL} from '../api'
 import { checkResponce } from '../../utils/check-responce';
 
 export const MAKE_ORDER_INGREDIENT         = "MAKE_ORDER_INGREDIENT";

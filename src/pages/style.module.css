@@ -1,0 +1,25 @@
+.wrapper{
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    max-width: 480px;
+}
+
+.usefullLinks{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #8585AD;
+}
+
+.link{
+    text-decoration: none;
+    color: #4C4CFF;
+    margin-left: 16px;
+}

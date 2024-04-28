@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import {store} from './services/store'
+import { store } from './services/store'
 import App from './components/app/app';
 
 //https://norma.nomoreparties.space/api/ingredients
@@ -14,10 +14,10 @@ const root = ReactDOM.createRoot(
 
 
 root.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <App/>
-    </BrowserRouter>
-  </Provider>
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
 );
 
