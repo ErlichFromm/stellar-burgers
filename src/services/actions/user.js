@@ -118,6 +118,7 @@ export const forgotPassword = (form, cb) => (dispatch) => {
         .catch(error => {
             dispatch({type: FORGOT_PASSWORD_REQUEST_FAILED})
         })
+    
 }
 
 export const createUser = (form, cb) => (dispatch) => {

@@ -20,10 +20,6 @@ const App = () => {
         dispatch(getUser());
     }, [dispatch]);
 
-    useEffect(() => {
-        console.log(location);
-    }, [location])
-
     const handleModalClose = () => {
         navigate(-1);
     }

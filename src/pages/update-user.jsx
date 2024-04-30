@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import usePassword from '../hooks/usePassword';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -18,24 +18,31 @@ const UpdateUser = () => {
         password: ''
     })
 
-
-    const handleInputChange = (e) => {
-        setValue({ ...form, [e.target.name]: e.target.value });
-        setModified(checkInputs());
+    const initialState = {
+        name: user.name,
+        email: user.email,
+        password: ''
     }
 
-    const checkInputs = () => {
-        let isModified = false;
-        for(let key in form){
-            if(form[key] == user[key]) isModified = true;
-        }
-        return isModified;
-
+    useEffect(() => {
+        setModified(JSON.stringify(form) === JSON.stringify(initialState));
+    }, [form])
+    
+    const handleInputChange = (e) => {
+        setValue({ ...form, [e.target.name]: e.target.value });
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(updateUser(form))
+    }
+
+    const resetForm = () => {
+        setValue({
+            name: user.name,
+            email: user.email,
+            password: ''
+        })
     }
 
     return (
@@ -70,9 +77,9 @@ const UpdateUser = () => {
                     onIconClick={togglePass}
                 />
             </div>
-            {isModified &&
+            {!isModified &&
                 <div className={styles.formBtns}>
-                    <Button htmlType="button" type="secondary" size="medium">Отменить</Button>
+                    <Button htmlType="button" type="secondary" size="medium" onClick={resetForm}>Отменить</Button>
                     <Button htmlType="submit" type="primary" size="medium">Сохранить</Button>
                 </div>
             }
