@@ -19,7 +19,15 @@ import {
 
     USER_REGISTRATION_REQUEST,
     USER_REGISTRATION_REQUEST_SUCCESS,
-    USER_REGISTRATION_REQUEST_FAILED
+    USER_REGISTRATION_REQUEST_FAILED,
+
+    USER_UPDATE_REQUEST,
+    USER_UPDATE_REQUEST_SUCCESS,
+    USER_UPDATE_REQUEST_FAILED,
+
+    RESET_PASSWORD_REQUEST,
+    RESET_PASSWORD_REQUEST_SUCCESS,
+    RESET_PASSWORD_REQUEST_FAILED
 } from '../actions/user';
 
 
@@ -48,7 +56,15 @@ const initialState = {
 
     registerUser: false,
     registerUserSuccess: false,
-    registerUserFailed: false,  
+    registerUserFailed: false,
+
+    updateUser: false,
+    updateUserSuccess: false,
+    updateUserFailed: false,
+
+    resetPassword: false,
+    resetPasswordSuccess: false,
+    resetPasswordFailed: false,
 
 }
 
@@ -175,7 +191,7 @@ export const userReducer = (state = initialState, action) => {
                 ...state,
                 registerUser: true,
                 registerUserSuccess: false,
-                registerUserFailed: false,  
+                registerUserFailed: false,
             }
         }
         case USER_REGISTRATION_REQUEST_SUCCESS: {
@@ -183,7 +199,7 @@ export const userReducer = (state = initialState, action) => {
                 ...state,
                 registerUser: false,
                 registerUserSuccess: true,
-                registerUserFailed: false,  
+                registerUserFailed: false,
                 isAuthChecked: true,
                 isAuth: true,
                 user: {
@@ -197,7 +213,59 @@ export const userReducer = (state = initialState, action) => {
                 ...state,
                 registerUser: false,
                 registerUserSuccess: false,
-                registerUserFailed: true,  
+                registerUserFailed: true,
+            }
+        }
+        case USER_UPDATE_REQUEST: {
+            return {
+                ...state,
+                updateUser: false,
+                updateUserSuccess: false,
+                updateUserFailed: false,
+            }
+        }
+        case USER_UPDATE_REQUEST_SUCCESS: {
+            return {
+                ...state,
+                updateUser: false,
+                updateUserSuccess: true,
+                updateUserFailed: false,
+                user: {
+                    name: action.payload.user.name,
+                    email: action.payload.user.email
+                }
+            }
+        }
+        case USER_UPDATE_REQUEST_FAILED: {
+            return {
+                ...state,
+                updateUser: false,
+                updateUserSuccess: false,
+                updateUserFailed: true,
+            }
+        }
+        case RESET_PASSWORD_REQUEST: {
+            return {
+                ...state,
+                resetPassword: true,
+                resetPasswordSuccess: false,
+                resetPasswordFailed: false
+            }
+        }
+        case RESET_PASSWORD_REQUEST_SUCCESS: {
+            return {
+                ...state,
+                resetPassword: false,
+                resetPasswordSuccess: true,
+                resetPasswordFailed: false
+            }
+        }
+        case RESET_PASSWORD_REQUEST_FAILED: {
+            return {
+                ...state,
+                resetPassword: false,
+                resetPasswordSuccess: false,
+                resetPasswordFailed: true
             }
         }
         default: {
@@ -205,3 +273,4 @@ export const userReducer = (state = initialState, action) => {
         }
     }
 }
+

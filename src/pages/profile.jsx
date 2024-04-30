@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Routes, Route, NavLink, useLocation } from 'react-router-dom';
-import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { logout } from '../services/actions/user';
 import { useNavigate } from 'react-router-dom';
-import usePassword from '../hooks/usePassword';
+import UpdateUser from './update-user';
+
 
 import styles from './style.module.css';
 
@@ -16,68 +16,12 @@ const Profile = () => {
     const location = useLocation();
     const navigate = useNavigate();
 
-    const { user } = useSelector(state => state.user)
-    const [form, setValue] = useState({
-        name: user.name,
-        email: user.email,
-        password: ''
-    })
-
-
-    const [passType, icon, togglePass] = usePassword();
-
-    const handleInputChange = (e) => {
-        setValue({ ...form, [e.target.name]: e.target.value })
-    }
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-    }
 
     const logOutHandler = () => {
         dispatch(logout(() => {
             navigate('/sign-in');
         }))
     }
-
-    const profile = (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <Input
-                    type={'text'}
-                    name='name'
-                    placeholder={'Имя'}
-                    extraClass='mb-6'
-                    icon={'EditIcon'}
-                    value={form.name}
-                    onChange={handleInputChange}
-                />
-                <Input
-                    type={'email'}
-                    name='email'
-                    placeholder={'Email'}
-                    extraClass='mt-6 mb-6'
-                    icon={'EditIcon'}
-                    value={form.email}
-                    onChange={handleInputChange}
-                />
-                <Input
-                    type={passType}
-                    name='password'
-                    placeholder={'Пароль'}
-                    extraClass='mt-6 mb-6'
-                    icon={icon}
-                    value={form.password}
-                    onChange={handleInputChange}
-                    onIconClick={togglePass}
-                />
-            </div>
-            <div className={styles.formBtns}>
-                <Button htmlType="button" type="secondary" size="medium">Отменить</Button>
-                <Button htmlType="submit" type="primary" size="medium">Сохранить</Button>
-            </div>
-        </form>
-    );
 
     const history = (
         <p>История</p>
@@ -105,7 +49,7 @@ const Profile = () => {
             </div>
             <div className={styles.content}>
                 <Routes>
-                    <Route index element={profile} />
+                    <Route index element={<UpdateUser/>} />
                     <Route path='history' element={history} />
                 </Routes>
             </div>

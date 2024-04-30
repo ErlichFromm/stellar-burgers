@@ -53,12 +53,12 @@ export const createUserRequest = async user => {
     })
 };
 
-export const resetPasswordRequest = async (password, token) => {
+export const resetPasswordRequest = async (newPassword, token) => {
     return await fetch(`${BASE_URL}/password-reset/reset`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
-            'password': `${password}`,
+            'password': `${newPassword}`,
             'token': `${token}`
         })
     })

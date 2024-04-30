@@ -14,12 +14,15 @@ const App = () => {
     const dispatch = useDispatch();
     const location = useLocation();
     const navigate = useNavigate();
-    const background = location.state && location.state.background;
 
     useEffect(() => {
         dispatch(getIngredients());
         dispatch(getUser());
     }, [dispatch]);
+
+    useEffect(() => {
+        console.log(location);
+    }, [location])
 
     const handleModalClose = () => {
         navigate(-1);
@@ -27,7 +30,7 @@ const App = () => {
 
     return (
         <>
-            <Routes location={background || location}>
+            <Routes location={location.state === 'background' || location}>
                 <Route path="/" element={<Layout />}>
                     <Route index element={<Home />} />
                     <Route path="/sign-in" element={<OnlyUnAuth element={<SignIn />} />} />
@@ -35,14 +38,14 @@ const App = () => {
                     <Route path='/profile/*' element={<OnlyAuth element={<Profile />} />} />
                     <Route path="/forgot-password" element={<OnlyUnAuth element={<ForgotPassword />} />} />
                     <Route path="/reset-password" element={<OnlyUnAuth element={<ResetPassword />} />} />
-                    <Route path="/ingredients/:id" element={<IndredientCard />} />
                     <Route path="/*" element={<PageNotFound />} />
+                    <Route path="/ingredients/:id" element={<IndredientCard />} />
                 </Route>
             </Routes>
-            {background && (
+            {location.state === 'background' && (
                 <Routes>
                     <Route path="/ingredients/:id" element={
-                        <Modal onClose={handleModalClose}>
+                        <Modal title='Детали ингредиента' onClose={handleModalClose}>
                             <IndredientCard />
                         </Modal>
                     } />

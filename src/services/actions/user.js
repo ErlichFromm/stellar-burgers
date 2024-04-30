@@ -44,6 +44,14 @@ export const USER_REGISTRATION_REQUEST = 'USER_REGISTRATION_REQUEST';
 export const USER_REGISTRATION_REQUEST_SUCCESS = 'USER_REGISTRATION_REQUEST_SUCCESS';
 export const USER_REGISTRATION_REQUEST_FAILED = 'USER_REGISTRATION_REQUEST_FAILED';
 
+export const USER_UPDATE_REQUEST = 'USER_UPDATE_REQUEST';
+export const USER_UPDATE_REQUEST_SUCCESS = 'USER_UPDATE_REQUEST_SUCCESS';
+export const USER_UPDATE_REQUEST_FAILED = 'USER_UPDATE_REQUEST_FAILED';
+
+export const RESET_PASSWORD_REQUEST = 'RESET_PASSWORD_REQUEST';
+export const RESET_PASSWORD_REQUEST_SUCCESS = 'RESET_PASSWORD_REQUEST_SUCCESS';
+export const RESET_PASSWORD_REQUEST_FAILED = 'RESET_PASSWORD_REQUEST_FAILED';
+
 export const login = (form) => (dispatch)=> {
     dispatch({type: LOGIN_REQUEST})
     loginRequest(form)
@@ -124,13 +132,33 @@ export const createUser = (form, cb) => (dispatch) => {
         })
         .catch(error => {
             dispatch({type: USER_REGISTRATION_REQUEST_FAILED})
-            console.log(error);
+
         })
 }
 
-// export const updateUser = (form) => (dispatch) => {
-//     updateUserRequest(form)
-// }
+export const updateUser = (form) => (dispatch) => {
+    dispatch({type:USER_UPDATE_REQUEST});
+    updateUserRequest(form)
+        .then(res => checkResponce(res))
+        .then(res => {
+            dispatch({type:USER_UPDATE_REQUEST_SUCCESS, payload: res});
+        })
+        .catch(error => {
+            dispatch({type:USER_UPDATE_REQUEST_FAILED});
+        })
+}
 
-
-// export const forgotPassword = () => {forgotPasswordRequest}
+export const resetPassword = (data, cb) => (dispatch) => {
+    dispatch({type: RESET_PASSWORD_REQUEST})
+    resetPasswordRequest(data.password, data.token)
+        .then(res => checkResponce(res))
+        .then(res => {
+            dispatch({type: RESET_PASSWORD_REQUEST_SUCCESS});
+            localStorage.removeItem('resetPassword');
+            cb();
+        })
+        .catch(error => {
+            dispatch({type: RESET_PASSWORD_REQUEST_FAILED})
+            console.log(error);
+        })
+}

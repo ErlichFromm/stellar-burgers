@@ -6,6 +6,7 @@ import ResetPassword from "./reset-password";
 import Profile from './profile'
 import PageNotFound from "./page-not-found";
 import IndredientCard from './indredient-card';
+import UpdateUser from './update-user'
 
 export {Home, 
         SignIn,
@@ -14,4 +15,5 @@ export {Home,
         ResetPassword,
         Profile,
         PageNotFound,
-        IndredientCard};
+        IndredientCard,
+        UpdateUser};

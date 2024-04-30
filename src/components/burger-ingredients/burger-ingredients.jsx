@@ -12,18 +12,6 @@ import Modal from "../modal/modal"
 
 import styles from './burger-ingredients.module.css'
 
-function findIgredientById(arr, id){
-    let ingredient = null;
-
-    arr.forEach((element) => {
-        if(element['_id'] === id){
-            ingredient = element;
-            return;
-        }
-    })
-
-    return ingredient;
-}
 
 const BurgerIngredients = () => {
 
@@ -31,8 +19,7 @@ const BurgerIngredients = () => {
 
     const {ingredients} = useSelector(store => store.ingredients)
     const {selectedTab} =  useSelector(store => store.tabs)
-    const {ingredientModalIsOpened} = useSelector(store => store.modals)
-    const {selectedIngredientId, ingredientsGroupes} = useSelector(store => store.ingredients)
+    const {ingredientsGroupes} = useSelector(store => store.ingredients)
 
     const tabRef = useRef(null)
     const bunRef = useRef(null);
@@ -95,10 +82,6 @@ const BurgerIngredients = () => {
         dispatch({type: CHANGE_TAB, payload: minOffsetName});
     }
 
-    const closeModalHandler = () => {
-        dispatch({type: CLOSE_INGREDIENT_MODAL});
-    }
-
     return (
         <div className={`$ mr-4 ${styles.burgerWrapper}`}>
             <h2 className="text text_type_main-large mt-10">Соберите бургер</h2>
@@ -114,13 +97,7 @@ const BurgerIngredients = () => {
                 <div ref={sauceRef}><IngredientSection title="Соусы" data={ingredientsGroupes['sauce'] ? ingredientsGroupes['sauce'] : []} /></div>
                 <div ref={mainRef}><IngredientSection title="Начинки" data={ingredientsGroupes['main'] ? ingredientsGroupes['main'] : []} /></div>
             </section>
-
-            {   ingredientModalIsOpened &&      
-                <Modal title="Детали ингредиента" onClose={closeModalHandler}>
-                    <IngredientDetails ingredient={findIgredientById(ingredients, selectedIngredientId)}/>
-                </Modal>
-            }
-            
+           
         </div>
     );
 }
