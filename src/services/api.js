@@ -1,5 +1,4 @@
 import { getAccessToken, getRefreshToken } from '../utils/localStorage';
-import { checkResponce } from '../utils/check-responce';
 
 export const BASE_URL = 'https://norma.nomoreparties.space/api';
 
@@ -14,7 +13,6 @@ export const loginRequest = async form => {
 }
 
 export const getUserRequest = async () => {
-    console.log(getAccessToken());
     return await fetch(`${BASE_URL}/auth/user`, {
         method: 'GET',
         headers: { 

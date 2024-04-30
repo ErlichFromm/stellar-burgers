@@ -1,4 +1,3 @@
-import {BASE_URL} from '../api'
 import {v4 as uuid} from 'uuid'
 import { checkResponce } from '../../utils/check-responce';
 

@@ -1,10 +1,10 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React,{ useState } from 'react';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link } from 'react-router-dom';
 import styles from './style.module.css';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { login } from '../services/actions/user';
-import { useNavigate } from 'react-router-dom';
+import usePassword from '../hooks/usePassword';
 
 
 const SignIn = () => {
@@ -14,6 +14,8 @@ const SignIn = () => {
         email: '',
         password: ''
     })
+    
+    const [passType, icon, tooglePass] = usePassword()
 
     const handleInputChange = e => {
         setValue({ ...form, [e.target.name]: e.target.value});
@@ -36,13 +38,14 @@ const SignIn = () => {
                 value={form.email}
             />
             <Input
-                type={'password'}
+                type={passType}
                 placeholder={'Пароль'}
-                icon={'ShowIcon'}
+                icon={icon}
                 onChange={handleInputChange}
                 name={'password'}
                 extraClass='mb-6'
                 value={form.password}
+                onIconClick={tooglePass}
             />
             <Button htmlType='submit' size='medium' extraClass='mb-20'>Войти</Button>
             <div className={styles.usefullLinks}>

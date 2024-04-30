@@ -14,16 +14,14 @@ import styles from "./ingredient-card.module.css"
 
 const IngredientCard = ({ingredient}) => {
 
-    const dispatch = useDispatch();
     const location = useLocation();
     const {selectedIngredients, selectedBun} = useSelector(store => store.ingredients);
-    
     const [ingredienCount, setIngredientCount] = useState(0);
  
-    const onIngredientCardClickHandler = (id) => {
-        dispatch({type: SET_SELECTED_INGREDIENT_ID, payload: id})
-        dispatch({type: OPEN_INGREDIENT_MODAL})
-    }
+    // const onIngredientCardClickHandler = (id) => {
+    //     dispatch({type: SET_SELECTED_INGREDIENT_ID, payload: id})
+    //     dispatch({type: OPEN_INGREDIENT_MODAL})
+    // }
 
     const [ ,dragRef] = useDrag({
         type: ingredient.type,

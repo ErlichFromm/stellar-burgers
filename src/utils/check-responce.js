@@ -1,8 +1,9 @@
 export const checkResponce = (res) => {
 
-    if(res.ok){
-        return res.json();
+    if(!res.ok){
+        return Promise.reject(res)
     }
-    return Promise.reject(`Ошибка получения данных ${res.status}`)
+    
+    return res.json()
 
 }

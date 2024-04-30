@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import { useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 import { BurgerIcon, ListIcon, ProfileIcon, Logo } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -19,7 +19,7 @@ const AppHeader = () => {
                         to="/" 
                         className={setActive}
                     >
-                        <BurgerIcon />
+                        <BurgerIcon type="secondary"/>
                         <span className="text text_type_main-small ml-2">Конструктор</span>
                     </NavLink>
                     <NavLink 
@@ -27,7 +27,7 @@ const AppHeader = () => {
                         className={setActive}
                     >
                         <ListIcon type="secondary" />
-                        <span className="text  text_type_main-small text_color_inactive ml-2">Лента заказов</span>
+                        <span className="text  text_type_main-small ml-2">Лента заказов</span>
                     </NavLink>
                 </nav>
 
@@ -43,7 +43,7 @@ const AppHeader = () => {
                     className={setActive}
                 >
                     <ProfileIcon type="secondary" />
-                    <span className="text  text_type_main-small text_color_inactive ml-2">
+                    <span className="text  text_type_main-small ml-2">
                         {isAuth ? (
                             <span>{user.name}</span>
                         ) : (

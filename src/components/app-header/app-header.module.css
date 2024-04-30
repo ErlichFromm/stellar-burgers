@@ -23,8 +23,7 @@
 }
 
 .logo{
-    align-self: center;
-    padding-right: 166px;
+    padding-right: 170px;
 }
 
 .link{
@@ -33,10 +32,10 @@
     padding: 16px 20px;
     background-color: transparent;
     border: none;
-    color: white;
     border: 1px solid transparent;
     border-radius: 30px;
     text-decoration: none;
+    color: #8585AD;
 }
 
 .link:not(:last-child){
@@ -50,5 +49,6 @@
 
 .active{
     composes: link;
-    border: 1px solid #33333b; 
+    border: 1px solid #696979;
+    color: #fff; 
 }
