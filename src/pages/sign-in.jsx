@@ -5,21 +5,18 @@ import styles from './style.module.css';
 import { useDispatch } from 'react-redux';
 import { login } from '../services/actions/user';
 import usePassword from '../hooks/usePassword';
+import useForm from '../hooks/useForm';
 
 
 const SignIn = () => {
 
     const dispatch = useDispatch();
-    const [form, setValue] = useState({
+    const [form, handleInputChange] = useForm({
         email: '',
         password: ''
-    })
+    });
     
     const [passType, icon, tooglePass] = usePassword()
-
-    const handleInputChange = e => {
-        setValue({ ...form, [e.target.name]: e.target.value});
-    }
 
     const handleSubmit = (e) => {
         e.preventDefault();

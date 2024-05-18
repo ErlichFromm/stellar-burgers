@@ -6,13 +6,14 @@ import styles from './style.module.css';
 import usePassword from '../hooks/usePassword';
 import { resetPassword } from '../services/actions/user';
 import { useNavigate } from 'react-router-dom';
+import useForm from '../hooks/useForm';
 
 const ResetPassword = () => {
 
     const navigation = useNavigate();
     const dispatch = useDispatch();
     const [passType, icon, togglePass] = usePassword();
-    const [form, setValue] = useState({
+    const [form, setValue] = useForm({
         password: '',
         token: '',
     });

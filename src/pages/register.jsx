@@ -5,6 +5,7 @@ import { Link, useNavigate} from 'react-router-dom';
 import { createUser } from '../services/actions/user';
 import styles from './style.module.css';
 import usePassword  from '../hooks/usePassword'
+import useForm from '../hooks/useForm';
 
 const Register = () => {
 
@@ -12,15 +13,11 @@ const Register = () => {
     const navigate = useNavigate();
     const [passType, icon, tooglePass] = usePassword();
 
-    const [form, setValue] = useState({
+    const [form, handleInputChange] = useForm({
         name: '',
         email: '',
         password: ''
     })
-
-    const onChange = (e) => {
-        setValue({...form, [e.target.name]: e.target.value});
-    }
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -38,7 +35,7 @@ const Register = () => {
                 placeholder={'Имя'}
                 extraClass='mt-6 mb-6'
                 value={form.name}
-                onChange={onChange}
+                onChange={handleInputChange}
             />
             <Input
                 name={'email'}
@@ -46,7 +43,7 @@ const Register = () => {
                 placeholder={'E-mail'}
                 extraClass=' mb-6'
                 value={form.email}
-                onChange={onChange}
+                onChange={handleInputChange}
             />
             <Input
                 name={'password'}
@@ -55,7 +52,7 @@ const Register = () => {
                 extraClass=' mb-6'
                 icon={icon}
                 onIconClick={tooglePass}
-                onChange={onChange}
+                onChange={handleInputChange}
                 value={form.password}
             />
             <Button htmlType='submit' size='medium' extraClass='mb-20'>Зарегистироваться</Button>

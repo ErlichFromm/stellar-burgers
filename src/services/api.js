@@ -1,3 +1,4 @@
+
 import { getAccessToken, getRefreshToken } from '../utils/localStorage';
 
 export const BASE_URL = 'https://norma.nomoreparties.space/api';
@@ -20,7 +21,8 @@ export const getUserRequest = async () => {
             'Authorization': `Bearer ${getAccessToken()}`
         },
     })
-};
+}
+
 
 export const updateUserRequest = async userInfo => {
     return await fetch(`${BASE_URL}/auth/user`, {

@@ -4,19 +4,16 @@ import { forgotPassword } from '../services/actions/user';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link, useNavigate} from 'react-router-dom';
 import styles from './style.module.css';
+import useForm from '../hooks/useForm';
 
 const ForgotPassword = () => {
 
     const navigate = useNavigate()
     const dispatch = useDispatch();
 
-    const [form, setValue] = useState({
+    const [form, handleInputChange] = useForm({
         email: '',
     })
-
-    const handleInputChange = e => {
-        setValue({ ...form, [e.target.name]: e.target.value});
-    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
