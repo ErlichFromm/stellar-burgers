@@ -2,12 +2,15 @@ import React from "react";
 import { useSelector, useDispatch} from "react-redux";
 import { Button, CurrencyIcon, } from "@ya.praktikum/react-developer-burger-ui-components";
 import { OPEN_ORDER_DETAILS_MODAL } from "../../services/actions/modals";
-import {makeOrder} from '../../services/actions/order'
+import {makeOrder} from '../../services/actions/order';
+import { useNavigate } from 'react-router-dom';
 
 import styles from './total-cart.module.css'
 
 export const TotalCart = () => {
     const dispatch = useDispatch()
+    const navigate = useNavigate();
+    const {isAuth} = useSelector(store => store.user);
     const {totalPrice, selectedBun, selectedIngredients} = useSelector(store => store.ingredients)
 
     const makeRequestBody = () => {
@@ -22,6 +25,12 @@ export const TotalCart = () => {
     }
 
     const onConfirmBtnClickHandler = () => {
+
+        if(!isAuth){
+            navigate('/sign-in');
+            return;
+        }
+
         if(selectedBun !== undefined){
             dispatch({
                 type: OPEN_ORDER_DETAILS_MODAL

@@ -1,9 +1,8 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDrag } from "react-dnd";
+import { Link } from 'react-router-dom';
 
-import { useDispatch, useSelector } from "react-redux";
-import {SET_SELECTED_INGREDIENT_ID} from "../../services/actions/ingredients"
-import {OPEN_INGREDIENT_MODAL} from "../../services/actions/modals"
+import { useSelector } from "react-redux";
 
 import { Counter, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 
@@ -13,15 +12,9 @@ import styles from "./ingredient-card.module.css"
 
 const IngredientCard = ({ingredient}) => {
 
-    const dispatch = useDispatch();
     const {selectedIngredients, selectedBun} = useSelector(store => store.ingredients);
-    
     const [ingredienCount, setIngredientCount] = useState(0);
  
-    const onIngredientCardClickHandler = (id) => {
-        dispatch({type: SET_SELECTED_INGREDIENT_ID, payload: id})
-        dispatch({type: OPEN_INGREDIENT_MODAL})
-    }
 
     const [ ,dragRef] = useDrag({
         type: ingredient.type,
@@ -44,9 +37,10 @@ const IngredientCard = ({ingredient}) => {
     }, [selectedBun, selectedIngredients])
     
     return (
-        <div id={ingredient._id} 
+        <Link id={ingredient._id} 
+             to={`/ingredients/${ingredient._id}`}
+             state={'background'}
              className={styles.card} 
-             onClick={e => onIngredientCardClickHandler(ingredient._id)}
              ref={dragRef}>
 
             <div className="pl-4 pr-4">
@@ -64,7 +58,7 @@ const IngredientCard = ({ingredient}) => {
             ):(
                 <></>
             )}
-        </div>
+        </Link>
     );
 }
 

@@ -1,6 +1,7 @@
-import {BASE_URL} from '../../utils/api'
 import {v4 as uuid} from 'uuid'
 import { checkResponce } from '../../utils/check-responce';
+
+import { getIngredientRequest } from '../api';
 
 export const GET_INGREDIENT         = "GET_INGREDIENT";
 export const GET_INGREDIENT_FAILED  = "GET_INGREDIENT_FAILED";
@@ -18,7 +19,7 @@ export const CALC_INGREDIENT_COST = "CALC_INGREDIENT_COST";
 
 export const getIngredients = () => (dispatch) => {
     dispatch({type: GET_INGREDIENT});
-    fetch(`${BASE_URL}/ingredients`)
+    getIngredientRequest()
         .then(res => checkResponce(res))
         .then(res => {
             dispatch({type: GET_INGREDIENT_SUCCESS, payload: res.data})

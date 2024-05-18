@@ -23,26 +23,32 @@
 }
 
 .logo{
-    align-self: center;
-    padding-right: 166px;
+    padding-right: 170px;
 }
 
-.button{
+.link{
     display: flex;
     align-items: center;
     padding: 16px 20px;
     background-color: transparent;
     border: none;
-    color: white;
     border: 1px solid transparent;
     border-radius: 30px;
+    text-decoration: none;
+    color: #8585AD;
 }
 
-.button:not(:last-child){
+.link:not(:last-child){
     margin-right: 8px;
 }
 
-.button:hover{
+.link:hover{
     cursor: pointer;
-    border: 1px solid #33333b;
+    border: 1px solid #4e4e5a;
+}
+
+.active{
+    composes: link;
+    border: 1px solid #696979;
+    color: #fff; 
 }

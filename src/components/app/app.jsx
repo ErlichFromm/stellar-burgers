@@ -1,36 +1,52 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector} from "react-redux";
-import {getIngredients} from '../../services/actions/ingredients'
+import { useDispatch } from "react-redux";
+import { Routes, Route } from 'react-router-dom';
+import { getIngredients } from '../../services/actions/ingredients';
+import { getUser } from '../../services/actions/user';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { OnlyAuth, OnlyUnAuth } from '../protected-rout';
 
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
-
-import AppHeader from '../app-header/app-header';
-import BurgerIngredients from '../burger-ingredients/burger-ingredients';
-import BurgerConstructor from '../burger-constructor/burger-constructor';
-
-import styles from './app.module.css';
-
-const ingredientsAPI = 'https://norma.nomoreparties.space/api/ingredients';
+import Layout from "../layout/layout";
+import { Home, SignIn, Register, ForgotPassword, ResetPassword, Profile, PageNotFound, IndredientCard } from '../../pages';
+import Modal from "../modal/modal";
 
 const App = () => {
-    const {ingredients} = useSelector(store => store.ingredients);
     const dispatch = useDispatch();
+    const location = useLocation();
+    const navigate = useNavigate();
 
     useEffect(() => {
         dispatch(getIngredients());
-    }, []);
+        dispatch(getUser());
+    }, [dispatch]);
 
+    const handleModalClose = () => {
+        navigate(-1);
+    }
 
     return (
         <>
-            <AppHeader/>
-            <main className={styles.mainWrapper}>
-                <DndProvider backend={HTML5Backend}>
-                    <BurgerIngredients/>
-                    <BurgerConstructor/>
-                </DndProvider>
-            </main>
+            <Routes location={location.state === 'background' || location}>
+                <Route path="/" element={<Layout />}>
+                    <Route index element={<Home />} />
+                    <Route path="/sign-in" element={<OnlyUnAuth element={<SignIn />} />} />
+                    <Route path="/register" element={<OnlyUnAuth element={<Register />} />} />
+                    <Route path='/profile/*' element={<OnlyAuth element={<Profile />} />} />
+                    <Route path="/forgot-password" element={<OnlyUnAuth element={<ForgotPassword />} />} />
+                    <Route path="/reset-password" element={<OnlyUnAuth element={<ResetPassword />} />} />
+                    <Route path="/*" element={<PageNotFound />} />
+                    <Route path="/ingredients/:id" element={<IndredientCard />} />
+                </Route>
+            </Routes>
+            {location.state === 'background' && (
+                <Routes>
+                    <Route path="/ingredients/:id" element={
+                        <Modal title='Детали ингредиента' onClose={handleModalClose}>
+                            <IndredientCard />
+                        </Modal>
+                    } />
+                </Routes>
+            )}
         </>
     );
 }

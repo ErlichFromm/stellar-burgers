@@ -5,6 +5,8 @@
     width: 50%;
     margin-bottom: 10px;
     position: relative;
+    text-decoration: none;
+    color: #fff;
 }
 
 .card:hover{
