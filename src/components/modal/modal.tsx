@@ -1,6 +1,5 @@
-import React, { ReactNode, useEffect } from "react";
+import React, { PropsWithChildren, useEffect } from "react";
 import ReactDOM from "react-dom";
-import PropTypes from 'prop-types';
 
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import ModalOverlay from '../modal-overlay/modal-overlay';
@@ -10,11 +9,10 @@ const modalRootElement = document.getElementById('modal') as HTMLElement;
 
 interface IModalProps{
     title?: string;
-    children: ReactNode;
     onClose: () => void;
 }
 
-const Modal:React.FC<IModalProps> = (props) => {
+const Modal:React.FC<PropsWithChildren<IModalProps>> = (props) => {
 
     const {title, children, onClose} = props;
 
