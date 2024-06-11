@@ -1,14 +1,21 @@
 import {OPEN_INGREDIENT_MODAL,
         CLOSE_INGREDIENT_MODAL,
         OPEN_ORDER_DETAILS_MODAL,
-        CLOSE_ORDER_DETAILS_MODAL} from '../actions/modals'
+        CLOSE_ORDER_DETAILS_MODAL} from '../actions/modals';
 
-const initialState = {
+import { TModalActions } from '../actions/modals';
+
+interface IInitialState {
+    ingredientModalIsOpened: boolean;
+    orderModalIsOpened: boolean;
+}
+
+const initialState: IInitialState = {
     ingredientModalIsOpened: false,
     orderModalIsOpened:      false,
 }
 
-export const modalReducer = (state = initialState, action) => {
+export const modalReducer = (state = initialState, action: TModalActions) => {
     switch(action.type){
         case OPEN_INGREDIENT_MODAL: {
             return {

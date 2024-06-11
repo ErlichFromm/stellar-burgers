@@ -1,4 +1,5 @@
-
+import { IIngredient } from '../../types/request-types';
+import { TIngredientActions } from '../actions/ingredients';
 
 import {GET_INGREDIENT,
         GET_INGREDIENT_FAILED,
@@ -10,7 +11,29 @@ import {GET_INGREDIENT,
         CALC_INGREDIENT_COST,
         SWAP_INGREDIENTS} from '../actions/ingredients'
 
-const initialState = {
+interface IIngredientGroupe {
+    bun: Array<IIngredient>;
+    sauce: Array<IIngredient>;
+    main: Array<IIngredient>;
+}
+
+
+type TInitialState = {
+    ingredients: Array<IIngredient>;
+    ingredientsGroupes: IIngredientGroupe | object;
+    ingredientsRequest: boolean;
+    ingredientsFailed: boolean;
+
+    selectedIngredientId: null;
+    selectedBun: IIngredient | undefined;
+    selectedIngredients: Array<IIngredient>;
+
+    totalPrice: number;
+}
+
+
+
+const initialState: TInitialState = {
     ingredients: [],
     ingredientsGroupes: {},
     ingredientsRequest: false,
@@ -23,7 +46,7 @@ const initialState = {
     totalPrice: 0,
 }
 
-export const ingredientsReducer = (state = initialState, action) => {
+export const ingredientsReducer = (state = initialState, action: TIngredientActions) => {
     switch (action.type){
         case GET_INGREDIENT: {
             return {
@@ -54,7 +77,7 @@ export const ingredientsReducer = (state = initialState, action) => {
             }
         };
         case GROUPE_INGREDIENTS_BY_TYPE: {
-            const ingredientsGroupes = {
+            const ingredientsGroupes: IIngredientGroupe = {
                 bun: [],
                 sauce: [],
                 main: []

@@ -5,6 +5,24 @@ export const MAKE_ORDER_INGREDIENT: "MAKE_ORDER_INGREDIENT" = "MAKE_ORDER_INGRED
 export const MAKE_ORDER_INGREDIENT_FAILED: "MAKE_ORDER_INGREDIENT_FAILED" = "MAKE_ORDER_INGREDIENT_FAILED";
 export const MAKE_ORDER_INGREDIENT_SUCCESS: "MAKE_ORDER_INGREDIENT_SUCCESS" = "MAKE_ORDER_INGREDIENT_SUCCESS";
 
+export interface IMakeOrderAction {
+    readonly type: typeof MAKE_ORDER_INGREDIENT;
+}
+
+export interface IMakeOrderSuccessAction {
+    readonly type: typeof MAKE_ORDER_INGREDIENT_SUCCESS;
+    readonly payload: number
+}
+
+export interface IMakeOrderFailedAction {
+    readonly type: typeof MAKE_ORDER_INGREDIENT_FAILED;
+}
+
+export type TOrderActions = 
+    | IMakeOrderAction
+    | IMakeOrderSuccessAction
+    | IMakeOrderFailedAction
+
 
 export const makeOrder = (body: any) => (dispatch: any) => {
     try {

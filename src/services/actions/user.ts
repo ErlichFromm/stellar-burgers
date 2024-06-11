@@ -16,6 +16,8 @@ import {
     refreshTokenRequest
 } from '../api';
 
+import { IUser } from '../../types/request-types';
+
 export const USER_DATA_REQUEST:'USER_DATA_REQUEST' = 'USER_DATA_REQUEST';
 export const USER_DATA_REQUEST_SUCCESS:'USER_DATA_REQUEST_SUCCESS' = 'USER_DATA_REQUEST_SUCCESS';
 export const USER_DATA_REQUEST_FAILED:'USER_DATA_REQUEST_FAILED' = 'USER_DATA_REQUEST_FAILED';
@@ -49,6 +51,123 @@ export const USER_UPDATE_REQUEST_FAILED:'USER_UPDATE_REQUEST_FAILED' = 'USER_UPD
 export const RESET_PASSWORD_REQUEST:'RESET_PASSWORD_REQUEST' = 'RESET_PASSWORD_REQUEST';
 export const RESET_PASSWORD_REQUEST_SUCCESS:'RESET_PASSWORD_REQUEST_SUCCESS' = 'RESET_PASSWORD_REQUEST_SUCCESS';
 export const RESET_PASSWORD_REQUEST_FAILED:'RESET_PASSWORD_REQUEST_FAILED' = 'RESET_PASSWORD_REQUEST_FAILED';
+
+export interface IUserDataAction {
+    readonly type: typeof USER_DATA_REQUEST
+}
+
+export interface IUserDataSuccessAction {
+    readonly type: typeof USER_DATA_REQUEST_SUCCESS;
+    readonly payload: {user: IUser}
+}
+
+export interface IUserDataFailedAction {
+    readonly type: typeof USER_DATA_REQUEST_FAILED
+}
+
+export interface IRefreshTokenAction {
+    readonly type: typeof REFRESH_ACCESS_TOKEN_REQUEST
+}
+
+export interface IRefreshTokenSuccessAction {
+    readonly type: typeof REFRESH_ACCESS_TOKEN_REQUEST_SUCCESS
+}
+
+export interface IRefreshTokenFailedAction {
+    readonly type: typeof REFRESH_ACCESS_TOKEN_REQUEST_FAILED
+}
+
+export interface ILoginAction {
+    readonly type: typeof LOGIN_REQUEST
+}
+
+export interface ILoginSuccessAction {
+    readonly type: typeof LOGIN_REQUEST_SUCCESS
+    readonly payload: {user: IUser}
+}
+
+export interface ILoginFailedAction {
+    readonly type: typeof LOGIN_REQUEST_FAILED
+}
+
+export interface IUserLogoutAction {
+    readonly type: typeof USER_LOGOUT
+}
+
+export interface IForgotPassAction {
+    readonly type: typeof FORGOT_PASSWORD_REQUEST
+}
+
+export interface IForgotPassSuccessAction {
+    readonly type: typeof FORGOT_PASSWORD_REQUEST_SUCCESS
+}
+
+export interface IForgotPassFailedAction {
+    readonly type: typeof FORGOT_PASSWORD_REQUEST_FAILED
+}
+
+export interface IRegistrationAction {
+    readonly type: typeof USER_REGISTRATION_REQUEST
+}
+
+export interface IRegistrationSuccessAction {
+    readonly type: typeof USER_REGISTRATION_REQUEST_SUCCESS
+    readonly payload: {user: IUser}
+}
+
+export interface IRegistrationFailedAction {
+    readonly type: typeof USER_REGISTRATION_REQUEST_FAILED
+}
+
+export interface IUserUpdateAction {
+    readonly type: typeof USER_UPDATE_REQUEST
+}
+
+export interface IUserUpdateSuccessAction {
+    readonly type: typeof USER_UPDATE_REQUEST_SUCCESS
+    readonly payload: {user: IUser}
+}
+
+export interface IUserUpdateFailedAction {
+    readonly type: typeof USER_UPDATE_REQUEST_FAILED
+}
+
+export interface IResetPassAction {
+    readonly type: typeof RESET_PASSWORD_REQUEST
+}
+
+export interface IResetPassSuccessAction {
+    readonly type: typeof RESET_PASSWORD_REQUEST_SUCCESS
+}
+
+export interface IResetPassFailedAction {
+    readonly type: typeof RESET_PASSWORD_REQUEST_FAILED
+}
+
+export type TUserActions = 
+    | IUserDataAction
+    | IUserDataSuccessAction
+    | IUserDataFailedAction
+    | IRefreshTokenAction
+    | IRefreshTokenSuccessAction
+    | IRefreshTokenFailedAction
+    | ILoginAction
+    | ILoginSuccessAction
+    | ILoginFailedAction
+    | IUserLogoutAction
+    | IForgotPassAction
+    | IForgotPassSuccessAction
+    | IForgotPassFailedAction
+    | IRegistrationAction
+    | IRegistrationSuccessAction
+    | IRegistrationFailedAction
+    | IUserUpdateAction
+    | IUserUpdateSuccessAction
+    | IUserUpdateFailedAction
+    | IResetPassAction
+    | IResetPassSuccessAction
+    | IResetPassFailedAction
+
 
 export const login = (form: any) => (dispatch: any) => {
     try {

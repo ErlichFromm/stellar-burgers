@@ -2,7 +2,6 @@
 
 export interface IUser{
     email: string,
-    password: string,
     name: string,
 }
 
@@ -18,5 +17,6 @@ export interface IIngredient{
     image: string,
     image_mobile: string,
     image_large: string,
-    __v: number
+    __v: number,
+    uuid?:number
 }
