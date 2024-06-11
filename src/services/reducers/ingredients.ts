@@ -1,4 +1,4 @@
-import { IIngredient } from '../../types/request-types';
+import { IIngredient, IIngredientUUID } from '../../types/request-types';
 import { TIngredientActions } from '../actions/ingredients';
 
 import {GET_INGREDIENT,
@@ -7,35 +7,26 @@ import {GET_INGREDIENT,
         SET_SELECTED_INGREDIENT_ID,
         ADD_INGREDINT,
         DELETE_INGREDIENT,
-        GROUPE_INGREDIENTS_BY_TYPE,
         CALC_INGREDIENT_COST,
         SWAP_INGREDIENTS} from '../actions/ingredients'
 
-interface IIngredientGroupe {
-    bun: Array<IIngredient>;
-    sauce: Array<IIngredient>;
-    main: Array<IIngredient>;
-}
 
-
-type TInitialState = {
+export interface IInitialState {
     ingredients: Array<IIngredient>;
-    ingredientsGroupes: IIngredientGroupe | object;
     ingredientsRequest: boolean;
     ingredientsFailed: boolean;
 
     selectedIngredientId: null;
     selectedBun: IIngredient | undefined;
-    selectedIngredients: Array<IIngredient>;
+    selectedIngredients: Array<IIngredientUUID>;
 
     totalPrice: number;
 }
 
 
 
-const initialState: TInitialState = {
+const initialState: IInitialState = {
     ingredients: [],
-    ingredientsGroupes: {},
     ingredientsRequest: false,
     ingredientsFailed: false,
 
@@ -74,24 +65,6 @@ export const ingredientsReducer = (state = initialState, action: TIngredientActi
             return {
                 ...state,
                 selectedIngredientId: action.payload,
-            }
-        };
-        case GROUPE_INGREDIENTS_BY_TYPE: {
-            const ingredientsGroupes: IIngredientGroupe = {
-                bun: [],
-                sauce: [],
-                main: []
-            }
-            
-            action.payload.forEach(ingredient => {
-                if(ingredientsGroupes[ingredient.type]){
-                    ingredientsGroupes[ingredient.type].push(ingredient);
-                }
-            });
-
-            return {
-                ...state,
-                ingredientsGroupes,
             }
         };
         case ADD_INGREDINT: {

@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../../hooks/redux';
 import { Link, NavLink } from 'react-router-dom';
 import { BurgerIcon, ListIcon, ProfileIcon, Logo } from "@ya.praktikum/react-developer-burger-ui-components";
 
@@ -9,7 +9,7 @@ const setActive = ({ isActive }:{isActive:boolean}):string => isActive ? styles.
 
 const AppHeader:React.FC = () => {
 
-    const {user, isAuth} = useSelector((state:any) => state.user);
+    const {user, isAuth} = useAppSelector((state) => state.user);
 
     return (
         <header className={styles.header}>

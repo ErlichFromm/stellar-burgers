@@ -1,5 +1,6 @@
 import React, {useEffect, useRef} from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
 import {CHANGE_TAB} from '../../services/actions/tabs'
 import {GROUPE_INGREDIENTS_BY_TYPE} from '../../services/actions/ingredients'
@@ -7,16 +8,19 @@ import {GROUPE_INGREDIENTS_BY_TYPE} from '../../services/actions/ingredients'
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import IngredientSection from "../ingredient-section/ingeredient-section";
 
-import styles from './burger-ingredients.module.css'
+import styles from './burger-ingredients.module.css';
+import { IIngredient } from '../../types/request-types';
 
+function filterData(data: IIngredient[], type: string ){
+    return data.filter((item: IIngredient) => item.type == type);
+}
 
 const BurgerIngredients:React.FC = () => {
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
-    const {ingredients} = useSelector((store:any) => store.ingredients)
-    const {selectedTab} =  useSelector((store:any) => store.tabs)
-    const {ingredientsGroupes} = useSelector((store:any) => store.ingredients)
+    const {ingredients} = useAppSelector((store) => store.ingredients)
+    const {selectedTab} =  useAppSelector((store) => store.tabs)
 
     const tabRef   = useRef<HTMLDivElement>(null);
     const bunRef   = useRef<HTMLDivElement>(null);
@@ -92,9 +96,9 @@ const BurgerIngredients:React.FC = () => {
 
             
             <section className={`mt-10 ${styles.ingredientsSection}`} onScroll={sectionScrollHandler}>
-                <div ref={bunRef}><IngredientSection title="Булки" data={ingredientsGroupes['bun'] ? ingredientsGroupes['bun'] : []} /></div>
-                <div ref={sauceRef}><IngredientSection title="Соусы" data={ingredientsGroupes['sauce'] ? ingredientsGroupes['sauce'] : []} /></div>
-                <div ref={mainRef}><IngredientSection title="Начинки" data={ingredientsGroupes['main'] ? ingredientsGroupes['main'] : []} /></div>
+                <div ref={bunRef}><IngredientSection title="Булки" data={filterData(ingredients, 'bun')} /></div>
+                <div ref={sauceRef}><IngredientSection title="Соусы" data={filterData(ingredients, 'sauce')} /></div>
+                <div ref={mainRef}><IngredientSection title="Начинки" data={filterData(ingredients, 'main')} /></div>
             </section>
            
         </div>

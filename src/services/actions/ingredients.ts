@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid'
 import { checkResponce } from '../../utils/check-responce';
-import { IIngredient } from '../../types/request-types';
+import { IIngredient, IIngredientUUID } from '../../types/request-types';
 import {  } from '../../types/request-types';
 import { getIngredientRequest } from '../api';
 
@@ -54,7 +54,7 @@ export interface IAddIngredientAction{
 
 export interface IDeleteIngredientAction{
     readonly type: typeof DELETE_INGREDIENT;
-    readonly payload: number;
+    readonly payload: string;
 }
 
 export interface IGroupeIngredientByTypeAction{

@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector, useDispatch} from "react-redux";
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { Button, CurrencyIcon, } from "@ya.praktikum/react-developer-burger-ui-components";
 import { OPEN_ORDER_DETAILS_MODAL } from "../../services/actions/modals";
 import {makeOrder} from '../../services/actions/order';
@@ -9,22 +9,11 @@ import styles from './total-cart.module.css';
 import { IIngredient } from '../../types/request-types';
 
 export const TotalCart:React.FC = () => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const navigate = useNavigate();
 
-    const {isAuth} = useSelector((store:any) => store.user);
-    const {totalPrice, selectedBun, selectedIngredients} = useSelector((store:any) => store.ingredients)
-
-    const makeRequestBody = () => {
-
-        const ingredienstId = selectedIngredients.map((ingredient:IIngredient) => {
-            return ingredient._id;
-        })
-
-        return {
-            ingredients: [selectedBun._id, ...ingredienstId, selectedBun._id]
-        }
-    }
+    const {isAuth} = useAppSelector((store) => store.user);
+    const {totalPrice, selectedBun, selectedIngredients} = useAppSelector((store) => store.ingredients)
 
     const onConfirmBtnClickHandler = () => {
 
@@ -34,12 +23,13 @@ export const TotalCart:React.FC = () => {
         }
 
         if(selectedBun !== undefined){
+            const ingredientsId = [selectedBun, ...selectedIngredients, selectedBun].map((item) => item._id);
+            
             dispatch({
                 type: OPEN_ORDER_DETAILS_MODAL
             })
             
-            // @ts-ignore
-            dispatch(makeOrder(makeRequestBody()))
+            dispatch(makeOrder(ingredientsId))
         }
     }
 

@@ -4,7 +4,7 @@ import {MAKE_ORDER_INGREDIENT,
 
 import { TOrderActions } from '../actions/order';
 
-interface IInitialState {
+export interface IInitialState {
     order: number | undefined,
     orderRequest: boolean,
     orderFailed:  boolean,

@@ -1,4 +1,5 @@
 import React from "react";
+import { useAppSelector } from '../../hooks/redux';
 import { useSelector } from "react-redux";
 
 import styles from './order-details.module.css';
@@ -6,7 +7,7 @@ import doneImgPath from '../../images/done.png';
 
 
 const OrderDetail:React.FC = () => {
-    const {order} = useSelector((store: any) => store.order);
+    const {order} = useAppSelector((store: any) => store.order);
 
     return (
         <div className={styles.order}>

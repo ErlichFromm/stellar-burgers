@@ -18,5 +18,8 @@ export interface IIngredient{
     image_mobile: string,
     image_large: string,
     __v: number,
-    uuid?:number
+}
+
+export interface IIngredientUUID extends IIngredient{
+    uuid: string
 }

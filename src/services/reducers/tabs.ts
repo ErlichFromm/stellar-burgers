@@ -1,7 +1,7 @@
 import { CHANGE_TAB } from "../actions/tabs"
 import { TTabsActions } from '../actions/tabs';
 
-type IInitialState = {
+export interface IInitialState {
     selectedTab: 'bun' | 'sauce' | 'main'
 }
 

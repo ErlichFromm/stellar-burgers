@@ -33,7 +33,7 @@ import {
 import { TUserActions } from '../actions/user';
 import { IUser } from '../../types/request-types';
 
-interface IInitialState {
+export interface IInitialState {
     user: IUser
     isAuth: boolean,
     isAuthChecked: boolean,

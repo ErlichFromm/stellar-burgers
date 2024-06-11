@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDrag } from "react-dnd";
 import { Link } from 'react-router-dom';
 
-import { useSelector } from "react-redux";
+import { useAppSelector } from '../../hooks/redux';
 
 import { Counter, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import { IIngredient } from '../../types/request-types';
@@ -17,7 +17,7 @@ const IngredientCard:React.FC<IIngredientCardProps> = (props) => {
 
     const {ingredient} = props;
 
-    const {selectedIngredients, selectedBun} = useSelector((store:any) => store.ingredients);
+    const {selectedIngredients, selectedBun} = useAppSelector((store) => store.ingredients);
     const [ingredienCount, setIngredientCount] = useState(0);
  
 
@@ -36,7 +36,7 @@ const IngredientCard:React.FC<IIngredientCardProps> = (props) => {
                 setIngredientCount(0);
             }
         }else{
-            setIngredientCount(selectedIngredients.filter((selectedIngredient: IIngredient) => selectedIngredient._id === ingredient._id).length);
+            setIngredientCount(selectedIngredients.filter((selectedIngredient) => selectedIngredient._id === ingredient._id).length);
         } 
         
     }, [selectedBun, selectedIngredients])

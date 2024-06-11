@@ -5,7 +5,7 @@ import {OPEN_INGREDIENT_MODAL,
 
 import { TModalActions } from '../actions/modals';
 
-interface IInitialState {
+export interface IInitialState {
     ingredientModalIsOpened: boolean;
     orderModalIsOpened: boolean;
 }

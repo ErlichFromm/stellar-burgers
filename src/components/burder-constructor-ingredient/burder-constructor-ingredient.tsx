@@ -1,5 +1,5 @@
 import React, {useRef} from "react";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from '../../hooks/redux';
 import {DELETE_INGREDIENT, CALC_INGREDIENT_COST, SWAP_INGREDIENTS} from '../../services/actions/ingredients';
 
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -7,18 +7,18 @@ import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burg
 import styles from './burder-constructor-ingredient.module.css';
 import { useDrag, useDrop } from "react-dnd";
 
-import { IIngredient } from '../../types/request-types';
+import { IIngredientUUID } from '../../types/request-types';
 
 interface IBurgerConstructorIngredientProps{
     index: number,
-    ingredient:IIngredient & {uuid: string}
+    ingredient:IIngredientUUID
 }
 
 const BurgerConstructorIngredient: React.FC<IBurgerConstructorIngredientProps> = (props) => {
 
     const {index, ingredient} = props;
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const onBasketClickHandler = (ingredientUuid: string) => {
         dispatch({
@@ -39,14 +39,14 @@ const BurgerConstructorIngredient: React.FC<IBurgerConstructorIngredientProps> =
         })
     }
 
-    const ref = useRef(null);
+    const ref = useRef<HTMLDivElement>(null);
 
-    const [{handlerId}, dropRef] = useDrop({
+    const [, dropRef] = useDrop<{itemCurrentIndex: number}>({
         accept: 'constructorIngredient',
         collect: (monitor) => ({
             handlerId:monitor.getHandlerId(),
         }),
-        hover(item: any, monitor){
+        hover(item, monitor){
             if(!ref.current) return;
 
             const dragIndex = item.itemCurrentIndex;
@@ -54,11 +54,14 @@ const BurgerConstructorIngredient: React.FC<IBurgerConstructorIngredientProps> =
 
             if(dragIndex === hoverIndex) return;
             
-            // @ts-ignore
             const hoverBoundingRect = ref.current?.getBoundingClientRect();
             const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
             const clientOffset = monitor.getClientOffset();
-            // @ts-ignore
+
+            if (!clientOffset) {
+                return;
+            }
+            
             const hoverClientY = clientOffset.y - hoverBoundingRect.top
             
             if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) return;
@@ -83,7 +86,7 @@ const BurgerConstructorIngredient: React.FC<IBurgerConstructorIngredientProps> =
     dragRef(dropRef(ref));
 
     return (
-        <div ref={ref} className={`${styles.constructorIngredient} ${isDragging ? styles.isDragged : ''}`} data-handler-id={handlerId}>
+        <div ref={ref} className={styles.constructorIngredient}>
             <div className='mr-2'>
                 <DragIcon type="primary" />
             </div>

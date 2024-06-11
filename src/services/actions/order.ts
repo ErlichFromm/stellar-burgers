@@ -26,13 +26,15 @@ export type TOrderActions =
 
 export const makeOrder = (body: any) => (dispatch: any) => {
     try {
-        dispatch({ type: MAKE_ORDER_INGREDIENT });
+        dispatch({ type: MAKE_ORDER_INGREDIENT });    
         fetch(`${BASE_URL}/orders`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
             },
-            body: JSON.stringify(body)
+            body: JSON.stringify({
+                ingredients: body
+            })
 
         })
             .then(res => checkResponce(res))
