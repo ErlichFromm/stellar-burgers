@@ -1,5 +1,5 @@
-import React, {ChangeEvent, FormEvent, useState} from 'react';
-import { useDispatch } from 'react-redux';
+import React, { FormEvent} from 'react';
+import { useAppDispatch } from '../hooks/redux';
 import { forgotPassword } from '../services/actions/user';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link, useNavigate} from 'react-router-dom';
@@ -9,7 +9,7 @@ import useForm from '../hooks/useForm';
 const ForgotPassword: React.FC = () => {
 
     const navigate = useNavigate()
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const [form, handleInputChange] = useForm({
         email: '',
@@ -17,7 +17,6 @@ const ForgotPassword: React.FC = () => {
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // @ts-ignore
         dispatch(forgotPassword(form, function(){
             navigate('/reset-password');
         }));

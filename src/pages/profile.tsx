@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../hooks/redux';
 import { Routes, Route, NavLink, useLocation } from 'react-router-dom';
 import { logout } from '../services/actions/user';
 import UpdateUser from './update-user';
@@ -11,11 +11,10 @@ const setActive = ({ isActive }: {isActive:boolean}): string => isActive ? style
 
 const Profile:React.FC = () => {
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const location = useLocation();
 
     const logOutHandler = () => {
-        // @ts-ignore
         dispatch(logout())
     }
 

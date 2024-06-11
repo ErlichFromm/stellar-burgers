@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../hooks/redux';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link } from 'react-router-dom';
 import styles from './style.module.css';
@@ -11,7 +11,7 @@ import useForm from '../hooks/useForm';
 const ResetPassword:React.FC = () => {
 
     const navigation = useNavigate();
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const [passType, icon, togglePass] = usePassword();
     const [form, setValue] = useForm({
         password: '',
@@ -24,7 +24,6 @@ const ResetPassword:React.FC = () => {
 
     const onSubmit = (e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // @ts-ignore
         dispatch(resetPassword(form, function(){
             navigation('/sign-in');
         }))

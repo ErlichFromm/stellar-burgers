@@ -17,6 +17,7 @@ import {
 } from '../api';
 
 import { IUser } from '../../types/request-types';
+import { AppDispatch } from '../store';
 
 export const USER_DATA_REQUEST:'USER_DATA_REQUEST' = 'USER_DATA_REQUEST';
 export const USER_DATA_REQUEST_SUCCESS:'USER_DATA_REQUEST_SUCCESS' = 'USER_DATA_REQUEST_SUCCESS';
@@ -169,7 +170,8 @@ export type TUserActions =
     | IResetPassFailedAction
 
 
-export const login = (form: any) => (dispatch: any) => {
+export const login = 
+    (form: {email: string; password: string}) => (dispatch: AppDispatch) => {
     try {
         dispatch({ type: LOGIN_REQUEST })
         loginRequest(form)
@@ -188,7 +190,7 @@ export const login = (form: any) => (dispatch: any) => {
     }
 }
 
-export const logout = () => (dispatch: any) => {
+export const logout = () => (dispatch: AppDispatch) => {
     try {
         logoutRequest()
             .then(res => checkResponce(res))
@@ -202,7 +204,7 @@ export const logout = () => (dispatch: any) => {
 
 }
 
-export const getUser = () => (dispatch: any) => {
+export const getUser = () => (dispatch: AppDispatch) => {
     try {
         dispatch({ type: USER_DATA_REQUEST });
         getUserRequest()
@@ -220,7 +222,7 @@ export const getUser = () => (dispatch: any) => {
 }
 
 
-export const refreshToken = () => (dispatch: any) => {
+export const refreshToken = () => (dispatch: AppDispatch) => {
     try {
         dispatch({ type: REFRESH_ACCESS_TOKEN_REQUEST });
         refreshTokenRequest()
@@ -239,7 +241,8 @@ export const refreshToken = () => (dispatch: any) => {
     }
 }
 
-export const forgotPassword = (form: any, cb: any) => (dispatch: any) => {
+export const forgotPassword = 
+    (form: {email: string}, cb: () => void) => (dispatch: AppDispatch) => {
     try {
         dispatch({ type: FORGOT_PASSWORD_REQUEST })
         forgotPasswordRequest(form.email)
@@ -258,7 +261,8 @@ export const forgotPassword = (form: any, cb: any) => (dispatch: any) => {
 
 }
 
-export const createUser = (form: any, cb: any) => (dispatch: any) => {
+export const createUser = 
+    (form: {email: string; name: string; password: string}, cb: () => void) => (dispatch: AppDispatch) => {
     dispatch({ type: USER_REGISTRATION_REQUEST })
     createUserRequest(form)
         .then(res => checkResponce(res))
@@ -274,7 +278,8 @@ export const createUser = (form: any, cb: any) => (dispatch: any) => {
         })
 }
 
-export const updateUser = (form: any) => (dispatch: any) => {
+export const updateUser = 
+    (form: {name: string; email: string; password: string}) => (dispatch: AppDispatch) => {
     try {
         dispatch({ type: USER_UPDATE_REQUEST });
         updateUserRequest(form)
@@ -290,10 +295,11 @@ export const updateUser = (form: any) => (dispatch: any) => {
     }
 }
 
-export const resetPassword = (data: any, cb: any) => (dispatch: any) => {
+export const resetPassword 
+    = (form: {password: string; code: string; token: string}, cb: () => void) => (dispatch: AppDispatch) => {
     try{
     dispatch({ type: RESET_PASSWORD_REQUEST })
-    resetPasswordRequest(data)
+    resetPasswordRequest(form)
         .then(res => checkResponce(res))
         .then(res => {
             dispatch({ type: RESET_PASSWORD_REQUEST_SUCCESS });

@@ -1,13 +1,13 @@
 
 import { getAccessToken, getRefreshToken } from '../utils/localStorage';
-import {IForm} from '../types/form-types'
 import { IIngredient } from '../types/request-types';
 
 export const BASE_URL:string = 'https://norma.nomoreparties.space/api';
 
 
 // user
-export const loginRequest = async (form: IForm): Promise<any> => {
+export const loginRequest = 
+    async (form: {email: string; password: string}): Promise<any> => {
     return await fetch(`${BASE_URL}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -26,7 +26,8 @@ export const getUserRequest = async (): Promise<any> => {
 }
 
 
-export const updateUserRequest = async (userInfo: IForm): Promise<any> => {
+export const updateUserRequest 
+    = async (userInfo: {name: string; email: string; password: string}): Promise<any> => {
     return await fetch(`${BASE_URL}/auth/user`, {
         method: 'PATCH',
         headers: { 
@@ -45,7 +46,8 @@ export const logoutRequest = async (): Promise<any> => {
     })
 };
 
-export const createUserRequest = async (user: IForm): Promise<any> => {
+export const createUserRequest 
+    = async (user: {email: string; name: string; password: string}): Promise<any> => {
     return await fetch(`${BASE_URL}/auth/register`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -57,7 +59,8 @@ export const createUserRequest = async (user: IForm): Promise<any> => {
     })
 };
 
-export const resetPasswordRequest = async (form: IForm): Promise<any> => {
+export const resetPasswordRequest 
+    = async (form: {password: string; code: string, token: string}): Promise<any> => {
     return await fetch(`${BASE_URL}/password-reset/reset`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -68,7 +71,8 @@ export const resetPasswordRequest = async (form: IForm): Promise<any> => {
     })
 };
 
-export const forgotPasswordRequest = async (email: IForm): Promise<any> => {
+export const forgotPasswordRequest 
+    = async (email: string): Promise<any> => {
     return await fetch(`${BASE_URL}/password-reset`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -80,7 +84,8 @@ export const forgotPasswordRequest = async (email: IForm): Promise<any> => {
 
 // token
 
-export const refreshTokenRequest = async (): Promise<any> => {
+export const refreshTokenRequest 
+    = async (): Promise<any> => {
     return await fetch(`${BASE_URL}/auth/token`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -92,13 +97,15 @@ export const refreshTokenRequest = async (): Promise<any> => {
 
 // ingredients
 
-export const getIngredientRequest = async (): Promise<any> => {
+export const getIngredientRequest 
+    = async (): Promise<any> => {
     return await fetch(`${BASE_URL}/ingredients`)
 }
 
 // order
 
-export const sendIngredientsRequest = async (ingredients: IIngredient[]): Promise<any> => {
+export const sendIngredientsRequest 
+    = async (ingredients: IIngredient[]): Promise<any> => {
     return await fetch(`${BASE_URL}/orders`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},

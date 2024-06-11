@@ -2,6 +2,7 @@ import React from 'react';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link } from 'react-router-dom';
 import styles from './style.module.css';
+import { useAppDispatch } from '../hooks/redux';
 import { useDispatch } from 'react-redux';
 import { login } from '../services/actions/user';
 import usePassword from '../hooks/usePassword';
@@ -10,7 +11,7 @@ import useForm from '../hooks/useForm';
 
 const SignIn:React.FC = () => {
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const [form, handleInputChange] = useForm({
         email: '',
         password: ''
@@ -20,7 +21,6 @@ const SignIn:React.FC = () => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // @ts-ignore
         dispatch(login(form));
     }
 

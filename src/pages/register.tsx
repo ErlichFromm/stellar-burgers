@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../hooks/redux';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link, useNavigate} from 'react-router-dom';
 import { createUser } from '../services/actions/user';
@@ -9,7 +9,7 @@ import useForm from '../hooks/useForm';
 
 const Register:React.FC = () => {
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const [passType, icon, tooglePass] = usePassword();
 
@@ -21,7 +21,6 @@ const Register:React.FC = () => {
 
     const onSubmit = (e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // @ts-ignore
         dispatch(createUser(form, function(){
             navigate('/');
         }))
