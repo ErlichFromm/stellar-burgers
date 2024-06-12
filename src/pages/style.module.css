@@ -85,3 +85,29 @@
     align-items: center;
     margin-top: 60px;
 }
+
+/* feed */
+
+.feedWrapper{
+    width: 1300px;
+    margin: 40px auto;
+    height: calc(100vh - 180px);
+    border: 1px dotted red;
+    display: flex;
+    justify-content: center;
+}
+
+.feedLeftSide{
+    width: 50%;
+    border: 1px dotted blue;
+}
+
+.feedRightSide{
+    width: 50%;
+    border: 1px dotted grey;
+}
+
+.orderTape{
+    overflow: auto;
+    height: 95%;
+}

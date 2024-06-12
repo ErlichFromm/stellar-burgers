@@ -7,6 +7,7 @@ import Profile from './profile'
 import PageNotFound from "./page-not-found";
 import IndredientCard from './indredient-card';
 import UpdateUser from './update-user'
+import Feed from './feed';
 
 export {Home, 
         SignIn,
@@ -16,4 +17,5 @@ export {Home,
         Profile,
         PageNotFound,
         IndredientCard,
-        UpdateUser};
+        UpdateUser,
+        Feed};

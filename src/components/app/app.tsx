@@ -7,13 +7,23 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { OnlyAuth, OnlyUnAuth } from '../protected-rout';
 
 import Layout from "../layout/layout";
-import { Home, SignIn, Register, ForgotPassword, ResetPassword, Profile, PageNotFound, IndredientCard } from '../../pages/index';
+import {
+    Home,
+    SignIn,
+    Register,
+    ForgotPassword,
+    ResetPassword,
+    Profile,
+    PageNotFound,
+    IndredientCard,
+    Feed
+} from '../../pages/index';
 import Modal from "../modal/modal";
 
 
 const App = () => {
-    const dispatch:any = useDispatch();
-    const location:any = useLocation();
+    const dispatch: any = useDispatch();
+    const location: any = useLocation();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -33,6 +43,7 @@ const App = () => {
                     <Route path="/sign-in" element={<OnlyUnAuth element={<SignIn />} />} />
                     <Route path="/register" element={<OnlyUnAuth element={<Register />} />} />
                     <Route path='/profile/*' element={<OnlyAuth element={<Profile />} />} />
+                    <Route path='/feed' element={<OnlyAuth element={<Feed />} />} />
                     <Route path="/forgot-password" element={<OnlyUnAuth element={<ForgotPassword />} />} />
                     <Route path="/reset-password" element={<OnlyUnAuth element={<ResetPassword />} />} />
                     <Route path="/*" element={<PageNotFound />} />

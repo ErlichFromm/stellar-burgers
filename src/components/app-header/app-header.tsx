@@ -23,7 +23,7 @@ const AppHeader:React.FC = () => {
                         <span className="text text_type_main-small ml-2">Конструктор</span>
                     </NavLink>
                     <NavLink 
-                        to='/order-feed'
+                        to='/feed'
                         className={setActive}
                     >
                         <ListIcon type="secondary" />
