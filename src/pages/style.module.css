@@ -92,22 +92,51 @@
     width: 1300px;
     margin: 40px auto;
     height: calc(100vh - 180px);
-    border: 1px dotted red;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 .feedLeftSide{
     width: 50%;
-    border: 1px dotted blue;
 }
 
 .feedRightSide{
-    width: 50%;
-    border: 1px dotted grey;
+    width: 45%;
 }
 
 .orderTape{
     overflow: auto;
-    height: 95%;
+    padding-right: 20px;
+    height: 90%;
+}
+
+/* right-side */
+
+.feedRightSide{
+    padding-top: 90px;
+    display: flex;
+    flex-direction: column;
+}
+
+.orderState{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.orderState > div{
+    width: 45%;
+}
+
+.ready > ul{
+    color: #00CCCC;
+}
+
+.orderList{
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: start;
+    max-height: 150px;
 }

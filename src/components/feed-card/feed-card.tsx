@@ -22,17 +22,15 @@ const FeedCard: React.FC<IFeedCardProps> = ({ order }) => {
             <div className={styles.bottom}>
                 <div className={styles.icons}>
                     {order.icons.map((icon, index, array) => {
-                        console.log(array.length);
-
                         if (index < 5) {
                             return (
-                                <div className={styles.icon}>
+                                <div key={index} className={styles.icon}>
                                     <img src={icon.src} alt={icon.alt} />
                                 </div>
                             )
                         } else if (index === 6) {
                             return (
-                                <div className={styles.icon}>
+                                <div key={index} className={styles.icon}>
                                     <span className='text_type_digits-default'>+{array.length - 6}</span>
                                     <div className={styles.cyrcle}></div>
                                     <img src={icon.src} alt={icon.alt} />

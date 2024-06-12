@@ -1,6 +1,6 @@
 .order{
     box-sizing: border-box;
-    width: 600px;
+    max-width: 600px;
     padding: 24px;
     border-radius: 15px;
     background-color: #1C1C21;
