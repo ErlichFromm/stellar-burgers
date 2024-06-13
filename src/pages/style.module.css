@@ -125,7 +125,7 @@
 }
 
 .orderState > div{
-    width: 45%;
+    width: 260px;
 }
 
 .ready > ul{
@@ -138,5 +138,11 @@
     flex-wrap: wrap;
     flex-direction: column;
     align-items: start;
-    max-height: 150px;
+    max-height: 220px;
+    list-style: none;
+    overflow-y: auto;
+}
+
+.orderList > li{
+    margin-right: 10px;
 }

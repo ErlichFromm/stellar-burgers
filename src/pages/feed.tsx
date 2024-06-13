@@ -1,85 +1,47 @@
-import React, { useMemo } from 'react';
-import { useAppSelector } from '../hooks/redux';
+import React, { useEffect, useMemo } from 'react';
+import { useAppSelector, useAppDispatch } from '../hooks/redux';
 import styles from './style.module.css';
+import { FEED_CONNECTION_INIT, FEED_CONNECTION_CLOSE } from '../services/actions/feed';
+import { WSS_URL } from '../services/api';
 
 import FeedCard from '../components/feed-card/feed-card';
 import { IOrderDetails } from '../types/index';
 
 const Feed: React.FC = () => {
 
-    const { ingredients } = useAppSelector(store => store.ingredients)
+    const dispatch = useAppDispatch();
 
-    const mock = {
-        success: true,
-        orders: [
-            {
-                ingredients: [
-                    "643d69a5c3f7b9001cfa093c",
-                    "643d69a5c3f7b9001cfa0941",
-                    "643d69a5c3f7b9001cfa093d",
-                    "60d3463f7034a000269f45ea"
-                ],
-                _id: "",
-                status: "done",
-                number: 0,
-                createdAt: "2024-06-12T14:43:22.587Z",
-                updatedAt: "2021-06-23T14:43:22.603Z",
-                name: 'Название'
-            },
-            {
-                ingredients: [
-                    "643d69a5c3f7b9001cfa093c",
-                    "643d69a5c3f7b9001cfa0941",
-                    "643d69a5c3f7b9001cfa0943",
-                    "643d69a5c3f7b9001cfa093f",
-                    "643d69a5c3f7b9001cfa0940",
-                    "643d69a5c3f7b9001cfa093d",
-                    "643d69a5c3f7b9001cfa093f"
-                ],
-                _id: "",
-                status: "done",
-                number: 0,
-                createdAt: "2024-06-12T14:43:22.587Z",
-                updatedAt: "2021-06-23T14:43:22.603Z",
-                name: 'Название'
-            },
-            {
-                ingredients: [
-                    "643d69a5c3f7b9001cfa093c",
-                    "643d69a5c3f7b9001cfa0941",
-                    "643d69a5c3f7b9001cfa0943",
-                    "643d69a5c3f7b9001cfa093f",
-                    "643d69a5c3f7b9001cfa093c",
-                    "643d69a5c3f7b9001cfa0940",
-                    "643d69a5c3f7b9001cfa093d",
-                    "643d69a5c3f7b9001cfa093f"
-                ],
-                _id: "",
-                status: "done",
-                number: 0,
-                createdAt: "2024-06-12T14:43:22.587Z",
-                updatedAt: "2021-06-23T14:43:22.603Z",
-                name: 'Название'
-            },
-        ],
-        total: 2345,
-        totalToday: 123
-    }
+    const { total, totalToday, orders} = useAppSelector(store => store.feed);
+    const { ingredients } = useAppSelector(store => store.ingredients);
 
-    const mock2 = {
-        ready: ['034533', '034532','034531', '034530', '034532','034531', '034530'],
-        inProgress: ['034534', '034535']
-    }
+    useEffect(() => {
+        dispatch({
+            type: FEED_CONNECTION_INIT,
+            payload: `${WSS_URL}/all`
+        })
 
+        return () => {
+            dispatch({type: FEED_CONNECTION_CLOSE}) 
+        }
+    }, [])
+
+    // created | pending | done
+    let done: Array<number> = [];
+    let pending: Array<number> = [];
     let normalizedData: IOrderDetails[] = [];
 
     useMemo(() => {
-        normalizedData = mock.orders.map(order => {
+        normalizedData = orders.map(order => {
 
+            if(order.status === 'done') done.push(order.number);
+            if(order.status === 'pending') pending.push(order.number);
+            
             let icons: any = [];
-            let total: number = 0
+            let total: number = 0;
+            
 
             order.ingredients.forEach(orderIngredient => {
+
 
                 ingredients.forEach(ingredient => {
 
@@ -103,7 +65,7 @@ const Feed: React.FC = () => {
             }
         })
 
-    }, [ingredients]);
+    }, [ingredients, orders]);
 
     return (
         <div className={`text ${styles.feedWrapper}`}>
@@ -120,26 +82,26 @@ const Feed: React.FC = () => {
                     <div className={styles.ready}>
                         <div className='text_type_main-medium'>Готовы:</div>
                         <ul className={styles.orderList}>
-                            {mock2.ready.map(item => {
-                                return <div className='text text_type_digits-default'>{item}</div>
+                            {done.map(item => {
+                                return <li key={item} className='text text_type_digits-default'>{item}</li>
                             })}
                         </ul>
                     </div>
                     <div className='inProgress'>
                         <div className='text_type_main-medium'>В работе:</div>
                         <ul className={styles.orderList}>
-                            {mock2.inProgress.map(item => {
-                                return <div className='text text_type_digits-default'>{item}</div>
+                            {pending.map(item => {
+                                return <li key={item} className='text text_type_digits-default'>{item}</li>
                             })}
                         </ul>
                     </div>
                 </div>
 
                 <h3 className='text_type_main-medium mt-15'>Выполнено за всё время</h3>
-                <div className='text_type_digits-large'>{mock.total}</div>
+                <div className='text_type_digits-large'>{total}</div>
 
                 <h3 className='text_type_main-medium mt-15'>Выполнено за сегодня</h3>
-                <div className='text_type_digits-large'>{mock.totalToday}</div>
+                <div className='text_type_digits-large'>{totalToday}</div>
             </div>
         </div>
     );
