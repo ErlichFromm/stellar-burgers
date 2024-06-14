@@ -23,3 +23,24 @@ export interface IIngredient{
 export interface IIngredientUUID extends IIngredient{
     uuid: string
 }
+
+export interface IOrder{
+    success: boolean;
+    name: string;
+    order: {
+        ingredients: Array<IIngredient>;
+        _id: string;
+        owner: {
+            name: string;
+            email: string;
+            createdAt: string;
+            updatedAt: string;
+        }
+        status: 'done' | 'pending' | 'created';
+        name: string;
+        createdAt: string;
+        updatedAt: string;
+        number: number;
+        price: number;
+    }
+}

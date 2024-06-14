@@ -3,6 +3,7 @@ import { checkResponce } from '../../utils/check-responce';
 import { IIngredient, IIngredientUUID } from '../../types/request-types';
 import {  } from '../../types/request-types';
 import { getIngredientRequest } from '../api';
+import { AppDispatch } from '../store';
 
 export const GET_INGREDIENT: "GET_INGREDIENT" = "GET_INGREDIENT";
 export const GET_INGREDIENT_FAILED: "GET_INGREDIENT_FAILED" = "GET_INGREDIENT_FAILED";
@@ -79,7 +80,7 @@ export type TIngredientActions =
 
 
 
-export const getIngredients = () => (dispatch: any) => {
+export const getIngredients = () => (dispatch: AppDispatch) => {
     try {
         dispatch({ type: GET_INGREDIENT });
         getIngredientRequest()

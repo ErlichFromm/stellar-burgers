@@ -1,5 +1,7 @@
 import { BASE_URL } from '../api'
 import { checkResponce } from '../../utils/check-responce';
+import { IOrder } from '../../types/request-types';
+import { AppDispatch } from '../store';
 
 export const MAKE_ORDER_INGREDIENT: "MAKE_ORDER_INGREDIENT" = "MAKE_ORDER_INGREDIENT";
 export const MAKE_ORDER_INGREDIENT_FAILED: "MAKE_ORDER_INGREDIENT_FAILED" = "MAKE_ORDER_INGREDIENT_FAILED";
@@ -11,7 +13,7 @@ export interface IMakeOrderAction {
 
 export interface IMakeOrderSuccessAction {
     readonly type: typeof MAKE_ORDER_INGREDIENT_SUCCESS;
-    readonly payload: number
+    readonly payload: IOrder
 }
 
 export interface IMakeOrderFailedAction {
@@ -24,7 +26,7 @@ export type TOrderActions =
     | IMakeOrderFailedAction
 
 
-export const makeOrder = (body: any) => (dispatch: any) => {
+export const makeOrder = (body: any) => (dispatch: AppDispatch) => {
     try {
         dispatch({ type: MAKE_ORDER_INGREDIENT });    
         fetch(`${BASE_URL}/orders`, {

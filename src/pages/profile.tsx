@@ -44,7 +44,6 @@ const Profile:React.FC = () => {
                 <Routes>
                     <Route index element={<UpdateUser/>} />
                     <Route path='orders' element={<ProfileOrders/>} />
-                    {/* <Route path='orders/:number' element={<OrderCard/>} /> */}
                 </Routes>
             </div>
         </div>

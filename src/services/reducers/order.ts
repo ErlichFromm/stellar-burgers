@@ -3,15 +3,18 @@ import {MAKE_ORDER_INGREDIENT,
         MAKE_ORDER_INGREDIENT_SUCCESS} from '../actions/order'
 
 import { TOrderActions } from '../actions/order';
+import { IIngredient } from '../../types/index';
+import { IOrder } from '../../types/request-types';
+
 
 export interface IInitialState {
-    order: number | undefined,
+    order: IOrder | null,
     orderRequest: boolean,
     orderFailed:  boolean,
 }
 
 const initialState: IInitialState = {
-    order: undefined,
+    order: null,
     orderRequest: false,
     orderFailed:  false,
 }
