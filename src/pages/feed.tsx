@@ -3,7 +3,9 @@ import { useAppSelector, useAppDispatch } from '../hooks/redux';
 import styles from './style.module.css';
 import { FEED_CONNECTION_INIT, FEED_CONNECTION_CLOSE } from '../services/actions/feed';
 import { WSS_URL } from '../services/api';
+import normalizeOrders from '../utils/noramalizeOrder';
 
+import { Link } from 'react-router-dom';
 import FeedCard from '../components/feed-card/feed-card';
 import { IOrderDetails } from '../types/index';
 
@@ -11,7 +13,7 @@ const Feed: React.FC = () => {
 
     const dispatch = useAppDispatch();
 
-    const { total, totalToday, orders} = useAppSelector(store => store.feed);
+    const { total, totalToday, orders } = useAppSelector(store => store.feed);
     const { ingredients } = useAppSelector(store => store.ingredients);
 
     useEffect(() => {
@@ -21,7 +23,7 @@ const Feed: React.FC = () => {
         })
 
         return () => {
-            dispatch({type: FEED_CONNECTION_CLOSE}) 
+            dispatch({ type: FEED_CONNECTION_CLOSE })
         }
     }, [])
 
@@ -33,12 +35,12 @@ const Feed: React.FC = () => {
     useMemo(() => {
         normalizedData = orders.map(order => {
 
-            if(order.status === 'done') done.push(order.number);
-            if(order.status === 'pending') pending.push(order.number);
-            
+            if (order.status === 'done') done.push(order.number);
+            if (order.status === 'pending') pending.push(order.number);
+
             let icons: any = [];
             let total: number = 0;
-            
+
 
             order.ingredients.forEach(orderIngredient => {
 
@@ -61,7 +63,8 @@ const Feed: React.FC = () => {
                 date: new Date(order.createdAt).toLocaleString(),
                 name: order.name,
                 icons: icons,
-                total: total
+                total: total,
+                status: order.status,
             }
         })
 
@@ -73,7 +76,13 @@ const Feed: React.FC = () => {
                 <h2 className='text_type_main-medium'>Лента заказов</h2>
                 <div className={styles.orderTape}>
                     {normalizedData.map((order, index) => (
-                        <FeedCard order={order} key={index} />
+                        <Link
+                            to={`/feed/${order.number}`}
+                            key={order.number}
+                            className={styles.feedLink}
+                        >
+                            <FeedCard order={order} key={index} />
+                        </Link>
                     ))}
                 </div>
             </div>

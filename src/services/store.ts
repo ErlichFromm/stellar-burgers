@@ -24,7 +24,7 @@ const rootReducer = combineReducers({
 export const store = configureStore({
     reducer: rootReducer,
     middleware: (getDefaulMiddleware) => {
-        return getDefaulMiddleware().concat(
+        return getDefaulMiddleware({serializableCheck: false}).concat(
             socketMiddleware(feedWsActions)
         )
     }

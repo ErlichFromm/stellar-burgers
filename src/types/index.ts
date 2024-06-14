@@ -1,4 +1,5 @@
 
+// Данные о заказе
 export interface IOrder{
     ingredients: Array<string>;
     _id: string;
@@ -9,6 +10,7 @@ export interface IOrder{
     updatedAt: string;
 }
 
+// Нормализованные данные о заказе
 export interface IOrderDetails{
     number: number;
     date: string;
@@ -18,6 +20,7 @@ export interface IOrderDetails{
         alt: string;
     }[];
     total: number;
+    status: string;
 }
 
 export interface IIngredient{

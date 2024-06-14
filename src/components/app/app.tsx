@@ -6,6 +6,7 @@ import { getUser } from '../../services/actions/user';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { OnlyAuth, OnlyUnAuth } from '../protected-rout';
 
+import OrderCard from '../order-card/order-card';
 import Layout from "../layout/layout";
 import {
     Home,
@@ -43,7 +44,8 @@ const App = () => {
                     <Route path="/sign-in" element={<OnlyUnAuth element={<SignIn />} />} />
                     <Route path="/register" element={<OnlyUnAuth element={<Register />} />} />
                     <Route path='/profile/*' element={<OnlyAuth element={<Profile />} />} />
-                    <Route path='/feed' element={<OnlyAuth element={<Feed />} />} />
+                    <Route path='/feed' element={<Feed/>}/>
+                    <Route path='/feed/:number' element={<OrderCard/>}/>
                     <Route path="/forgot-password" element={<OnlyUnAuth element={<ForgotPassword />} />} />
                     <Route path="/reset-password" element={<OnlyUnAuth element={<ResetPassword />} />} />
                     <Route path="/*" element={<PageNotFound />} />

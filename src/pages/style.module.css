@@ -88,6 +88,11 @@
 
 /* feed */
 
+.feedLink{
+    text-decoration: none;
+    color: inherit;
+}
+
 .feedWrapper{
     width: 1300px;
     margin: 40px auto;
@@ -138,11 +143,13 @@
     flex-wrap: wrap;
     flex-direction: column;
     align-items: start;
+    width: 160px;
     max-height: 220px;
     list-style: none;
-    overflow-y: auto;
+    overflow: hidden;
 }
 
 .orderList > li{
     margin-right: 10px;
 }
+

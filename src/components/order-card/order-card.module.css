@@ -1,0 +1,59 @@
+.orderCard{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 650px;
+    /* border: 1px solid red; */
+    margin-top: 80px;
+}
+
+.number{
+    align-self: center;
+}
+
+.compound{
+    height: 360px;
+    padding-right: 10px;
+    overflow-y: scroll;
+}
+
+.compound > div:not(:last-child){
+    margin-bottom: 16px;
+}
+
+.ingredientRow{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 630px;
+}
+
+.ingredientImg{
+    width: 64px;
+    height: 64px;
+    border: 1px solid #d53a9d;
+    border-radius: 50%;
+}
+
+.ingredientImg > img{
+    width: 110px;
+    height: 64px;
+    margin-left: -22px;
+}
+
+
+
+.price{
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    padding-left: 16px;
+    margin-right: 10px;
+}
+
+.orderFooter{
+    margin-top: 40px;
+    width: inherit;
+    display: flex;
+    justify-content: space-between;
+}

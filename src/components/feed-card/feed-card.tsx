@@ -10,8 +10,6 @@ interface IFeedCardProps {
 
 const FeedCard: React.FC<IFeedCardProps> = ({ order }) => {
 
-    const { ingredients } = useAppSelector(store => store.ingredients)
-
     return (
         <div className={`text text_type_main-default ${styles.order}`}>
             <header className={styles.header}>
