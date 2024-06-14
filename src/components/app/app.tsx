@@ -50,6 +50,7 @@ const App = () => {
                     <Route path="/reset-password" element={<OnlyUnAuth element={<ResetPassword />} />} />
                     <Route path="/*" element={<PageNotFound />} />
                     <Route path="/ingredients/:id" element={<IndredientCard />} />
+                    <Route path='/profile/orders/:number' element={<OrderCard/>} />
                 </Route>
             </Routes>
             {location.state === 'background' && (

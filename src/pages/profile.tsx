@@ -4,6 +4,7 @@ import { Routes, Route, NavLink, useLocation } from 'react-router-dom';
 import { logout } from '../services/actions/user';
 import UpdateUser from './update-user';
 import ProfileOrders from '../pages/profile-orders';
+import OrderCard from '../components/order-card/order-card';
 
 
 import styles from './style.module.css';
@@ -19,17 +20,13 @@ const Profile:React.FC = () => {
         dispatch(logout())
     }
 
-    const history = (
-        <p>История</p>
-    );
-
     return (
         <div className={styles.profile}>
             <div className={styles.leftMenu}>
                 <NavLink to='/profile' className={setActive} end>
                     <div className={`text text_type_main-medium ${styles.menuItem}`}>Профиль</div>
                 </NavLink>
-                <NavLink to='/profile/history' className={setActive}>
+                <NavLink to='/profile/orders' className={setActive}>
                     <div className={`text text_type_main-medium ${styles.menuItem}`}>История заказов</div>
                 </NavLink>
                 <NavLink to='/sign-in' className={styles.menuLink} onClick={logOutHandler}>
@@ -46,7 +43,8 @@ const Profile:React.FC = () => {
             <div className={styles.content}>
                 <Routes>
                     <Route index element={<UpdateUser/>} />
-                    <Route path='history' element={<ProfileOrders/>} />
+                    <Route path='orders' element={<ProfileOrders/>} />
+                    {/* <Route path='orders/:number' element={<OrderCard/>} /> */}
                 </Routes>
             </div>
         </div>

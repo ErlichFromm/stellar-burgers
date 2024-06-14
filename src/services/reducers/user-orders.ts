@@ -24,7 +24,7 @@ const initialState = {
     error: null,
 }
 
-export const feedReducer = (state = initialState, action: TUserOrdersActions) => {
+export const userOrdersReducer = (state = initialState, action: TUserOrdersActions) => {
     switch (action.type) {
         case USER_ORDERS_CONNECTION_SUCCESS: {
             return {

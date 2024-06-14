@@ -11,6 +11,7 @@ import { modalReducer } from './reducers/modals';
 import { orderReducer } from "./reducers/order";
 import { userReducer } from "./reducers/user";
 import { feedReducer } from './reducers/feed';
+import { userOrdersReducer } from './reducers/user-orders';
 
 
 const rootReducer = combineReducers({
@@ -19,7 +20,8 @@ const rootReducer = combineReducers({
     modals: modalReducer,
     order: orderReducer,
     user: userReducer,
-    feed: feedReducer
+    feed: feedReducer,
+    userOrders: userOrdersReducer,
 })
 
 export const store = configureStore({

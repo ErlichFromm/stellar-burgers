@@ -3,7 +3,6 @@ import { useAppSelector, useAppDispatch } from '../hooks/redux';
 import styles from './style.module.css';
 import { FEED_CONNECTION_INIT, FEED_CONNECTION_CLOSE } from '../services/actions/feed';
 import { WSS_URL } from '../services/api';
-import normalizeOrders from '../utils/noramalizeOrder';
 
 import { Link } from 'react-router-dom';
 import FeedCard from '../components/feed-card/feed-card';
