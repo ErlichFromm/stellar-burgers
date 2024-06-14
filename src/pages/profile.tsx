@@ -3,6 +3,7 @@ import { useAppDispatch } from '../hooks/redux';
 import { Routes, Route, NavLink, useLocation } from 'react-router-dom';
 import { logout } from '../services/actions/user';
 import UpdateUser from './update-user';
+import ProfileOrders from '../pages/profile-orders';
 
 
 import styles from './style.module.css';
@@ -45,7 +46,7 @@ const Profile:React.FC = () => {
             <div className={styles.content}>
                 <Routes>
                     <Route index element={<UpdateUser/>} />
-                    <Route path='history' element={history} />
+                    <Route path='history' element={<ProfileOrders/>} />
                 </Routes>
             </div>
         </div>

@@ -29,9 +29,7 @@ const OrderCard: React.FC = () => {
             ingredients.forEach(ingredient => {
                 if(orderIngredient === ingredient._id) orderIngredients.push(ingredient)
             })
-        })     
-        console.log(orderIngredients);
-        
+        })      
 
         // Подсчёт одинаковых ингредиентов
         orderIngredients.forEach((orderIngredient, index) => {
@@ -88,7 +86,7 @@ const OrderCard: React.FC = () => {
                     <div className={`mt-4 ${styles.compound}`}>
                         {countOrderIngredients.map(ingredient => {
                             return (
-                                <div className={styles.ingredientRow}>
+                                <div key={ingredient._id} className={styles.ingredientRow}>
                                     <div className={`mr-4 ${styles.ingredientImg}`}>
                                         <img src={ingredient.image} alt={ingredient.name} />
                                     </div>

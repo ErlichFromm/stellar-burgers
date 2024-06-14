@@ -30,10 +30,11 @@ export const makeOrder = (body: any) => (dispatch: any) => {
         fetch(`${BASE_URL}/orders`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json;charset=utf-8'
+                'Content-Type': 'application/json;charset=utf-8',
+                'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
             },
             body: JSON.stringify({
-                ingredients: body
+                ingredients: body,
             })
 
         })

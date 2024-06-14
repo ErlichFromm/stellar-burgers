@@ -3,6 +3,7 @@ import { combineReducers } from "redux";
 
 import { socketMiddleware } from '../middleware/socket-middleware';
 import { feedWsActions } from '../services/actions/feed';
+import { userOrdersWSActions } from '../services/actions/user-orders';
 
 import { ingredientsReducer } from "./reducers/ingredients";
 import { tabsReducer } from "./reducers/tabs";
@@ -25,7 +26,8 @@ export const store = configureStore({
     reducer: rootReducer,
     middleware: (getDefaulMiddleware) => {
         return getDefaulMiddleware({serializableCheck: false}).concat(
-            socketMiddleware(feedWsActions)
+            socketMiddleware(feedWsActions),
+            socketMiddleware(userOrdersWSActions)
         )
     }
 })
