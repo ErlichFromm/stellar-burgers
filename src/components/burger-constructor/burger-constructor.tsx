@@ -3,7 +3,6 @@ import { useDrop } from "react-dnd";
 import { ConstructorElement} from "@ya.praktikum/react-developer-burger-ui-components";
 import BurgerConstructorIngredient from '../burder-constructor-ingredient/burder-constructor-ingredient'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { useSelector, useDispatch } from "react-redux";
 import {CALC_INGREDIENT_COST, addIngredient} from '../../services/actions/ingredients';
 import {CLOSE_ORDER_DETAILS_MODAL} from '../../services/actions/modals';
 

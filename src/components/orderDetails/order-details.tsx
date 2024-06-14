@@ -1,6 +1,5 @@
 import React from "react";
 import { useAppSelector } from '../../hooks/redux';
-import { useSelector } from "react-redux";
 
 import styles from './order-details.module.css';
 import doneImgPath from '../../images/done.png';

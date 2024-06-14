@@ -1,5 +1,4 @@
 import React, {useEffect, useRef} from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
 import {CHANGE_TAB} from '../../services/actions/tabs'

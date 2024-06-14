@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect } from 'react';
+import React, { useMemo } from 'react';
 import { useAppSelector } from '../../hooks/redux';
 import { useParams } from 'react-router-dom';
 import styles from './order-card.module.css';

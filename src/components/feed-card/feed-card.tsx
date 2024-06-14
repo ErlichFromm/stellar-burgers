@@ -1,6 +1,5 @@
 import React from 'react';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useAppSelector } from '../../hooks/redux';
 import { IOrderDetails } from '../../types/index';
 import styles from './feed-card.module.css';
 

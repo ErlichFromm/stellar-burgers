@@ -6,7 +6,6 @@ import {makeOrder} from '../../services/actions/order';
 import { useNavigate } from 'react-router-dom';
 
 import styles from './total-cart.module.css';
-import { IIngredient } from '../../types/request-types';
 
 export const TotalCart:React.FC = () => {
     const dispatch = useAppDispatch()

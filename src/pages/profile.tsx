@@ -4,7 +4,6 @@ import { Routes, Route, NavLink, useLocation } from 'react-router-dom';
 import { logout } from '../services/actions/user';
 import UpdateUser from './update-user';
 import ProfileOrders from '../pages/profile-orders';
-import OrderCard from '../components/order-card/order-card';
 
 
 import styles from './style.module.css';
