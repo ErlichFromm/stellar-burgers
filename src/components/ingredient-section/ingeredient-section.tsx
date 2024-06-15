@@ -2,7 +2,7 @@ import React from "react";
 import IngredientCard from '../ingredient-card/ingredient-card'
 import styles from './ingredient-section.module.css';
 
-import { IIngredient } from '../../types/request-types';
+import { IIngredient } from '../../types/index';
 
 interface IIngredientSectionProps{
     title: string;

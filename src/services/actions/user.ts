@@ -16,7 +16,7 @@ import {
     refreshTokenRequest
 } from '../api';
 
-import { IUser } from '../../types/request-types';
+import { IUser } from '../../types/index';
 import { AppDispatch } from '../store';
 
 export const USER_DATA_REQUEST:'USER_DATA_REQUEST' = 'USER_DATA_REQUEST';

@@ -3,7 +3,7 @@ import {MAKE_ORDER_INGREDIENT,
         MAKE_ORDER_INGREDIENT_SUCCESS} from '../actions/order'
 
 import { TOrderActions } from '../actions/order';
-import { IOrder } from '../../types/request-types';
+import { IOrder } from '../../types/index';
 
 
 export interface IInitialState {

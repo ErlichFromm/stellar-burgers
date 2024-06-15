@@ -31,7 +31,7 @@ import {
 } from '../actions/user';
 
 import { TUserActions } from '../actions/user';
-import { IUser } from '../../types/request-types';
+import { IUser } from '../../types/index';
 
 export interface IInitialState {
     user: IUser

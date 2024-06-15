@@ -8,7 +8,7 @@ import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import IngredientSection from "../ingredient-section/ingeredient-section";
 
 import styles from './burger-ingredients.module.css';
-import { IIngredient } from '../../types/request-types';
+import { IIngredient } from '../../types/index';
 
 function filterData(data: IIngredient[], type: string ){
     return data.filter((item: IIngredient) => item.type == type);

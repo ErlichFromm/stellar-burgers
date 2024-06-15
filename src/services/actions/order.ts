@@ -1,6 +1,6 @@
 import { BASE_URL } from '../api'
 import { checkResponce } from '../../utils/check-responce';
-import { IOrder } from '../../types/request-types';
+import { IOrder } from '../../types/index';
 import { AppDispatch } from '../store';
 
 export const MAKE_ORDER_INGREDIENT: "MAKE_ORDER_INGREDIENT" = "MAKE_ORDER_INGREDIENT";

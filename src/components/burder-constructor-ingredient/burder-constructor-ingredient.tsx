@@ -7,7 +7,7 @@ import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burg
 import styles from './burder-constructor-ingredient.module.css';
 import { useDrag, useDrop } from "react-dnd";
 
-import { IIngredientUUID } from '../../types/request-types';
+import { IIngredientUUID } from '../../types/index';
 
 interface IBurgerConstructorIngredientProps{
     index: number,

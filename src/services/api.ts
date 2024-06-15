@@ -1,6 +1,6 @@
 
 import { getAccessToken, getRefreshToken } from '../utils/localStorage';
-import { IIngredient } from '../types/request-types';
+import { IIngredient } from '../types/index';
 
 export const BASE_URL:string = 'https://norma.nomoreparties.space/api';
 export const WSS_URL: string = 'wss://norma.nomoreparties.space/orders';

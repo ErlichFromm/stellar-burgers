@@ -1,6 +1,6 @@
 import React from "react";
 import styles from './ingredient-details.module.css';
-import { IIngredient } from '../../types/request-types';
+import { IIngredient } from '../../types/index';
 
 interface IIngredientDetails{
     ingredient: IIngredient;

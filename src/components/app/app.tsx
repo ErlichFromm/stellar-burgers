@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { Routes, Route } from 'react-router-dom';
 import { getIngredients } from '../../services/actions/ingredients';
 import { getUser } from '../../services/actions/user';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { OnlyAuth, OnlyUnAuth } from '../protected-rout';
+import { useAppDispatch } from '../../hooks/redux';
 
 import OrderCard from '../order-card/order-card';
 import Layout from "../layout/layout";
@@ -21,10 +21,9 @@ import {
 } from '../../pages/index';
 import Modal from "../modal/modal";
 
-
 const App = () => {
-    const dispatch: any = useDispatch();
-    const location: any = useLocation();
+    const dispatch = useAppDispatch();
+    const location:any = useLocation();
     const navigate = useNavigate();
 
     useEffect(() => {

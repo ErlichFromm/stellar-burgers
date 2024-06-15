@@ -11,7 +11,7 @@ import OrderDetail from "../orderDetails/order-details";
 import { TotalCart } from "../total-cart/total-cart";
 
 import styles from './burger-constructor.module.css';
-import { IIngredientUUID } from '../../types/request-types';
+import { IIngredientUUID } from '../../types/index';
 
 const BurgerConstructor:React.FC = () => {
 

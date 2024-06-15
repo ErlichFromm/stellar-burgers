@@ -1,4 +1,4 @@
-import { IIngredient, IIngredientUUID } from '../../types/request-types';
+import { IIngredient, IIngredientUUID } from '../../types/index';
 import { TIngredientActions } from '../actions/ingredients';
 
 import {GET_INGREDIENT,

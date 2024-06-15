@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/redux';
 
 import { Counter, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
-import { IIngredient } from '../../types/request-types';
+import { IIngredient } from '../../types/index';
 
 import styles from "./ingredient-card.module.css"
 
