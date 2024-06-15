@@ -95,7 +95,7 @@
 
 .feedWrapper{
     width: 1300px;
-    margin: 40px auto;
+    margin: 10px auto;
     height: calc(100vh - 180px);
     display: flex;
     justify-content: space-between;

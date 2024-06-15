@@ -4,13 +4,14 @@ import {
     USER_ORDERS_CONNECTION_INIT, 
     USER_ORDERS_CONNECTION_CLOSE 
 } from '../services/actions/user-orders';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { IOrderDetails } from '../types/index';
 import FeedCard from '../components/feed-card/feed-card';
 import styles from './style.module.css';
 
 const ProfileOrders: React.FC = () => {
+    const location = useLocation();
     const accessToken = localStorage.getItem('accessToken');
 
     const dispatch = useAppDispatch();
@@ -69,6 +70,7 @@ const ProfileOrders: React.FC = () => {
             {normalizedData.map((order, index) => (
                 <Link
                     to={`/profile/orders/${order.number}`}
+                    state={{background: location}}
                     key={order.number}
                     className={styles.feedLink}
                 >

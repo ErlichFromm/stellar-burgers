@@ -24,7 +24,6 @@ export const checkActionObject = (data: unknown): data is ActionTemplate => {
   return (
     typeof data === "object" &&
     data instanceof Object &&
-    "payload" in data &&
     "type" in data &&
     typeof data.type === "string"
   );
@@ -42,14 +41,8 @@ export const socketMiddleware = (
     let socket: WebSocket | null = null;
 
     return (next) => (action) => {
-      
-      // Проверка
-      console.log(action);
-
+      next(action);
       if (!checkActionObject(action)) return;
-
-      // Проверка
-      console.log(action);
 
       const { dispatch } = store;
       const { type, payload } = action;
@@ -62,8 +55,6 @@ export const socketMiddleware = (
         onError,
         onMessage,
       } = wsActions;
-      
-      if (!payload) return;
       if (type === wsInit) {
         socket = new WebSocket(payload);
         socket.onopen = () => {
@@ -98,11 +89,6 @@ export const socketMiddleware = (
       if (wsSendMessage && type === wsSendMessage && socket) {
         socket.send(JSON.stringify(payload));
       }
-
-      next(action);
     };
   };
 };
-
-
-

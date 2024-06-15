@@ -115,3 +115,7 @@ export const sendIngredientsRequest
         })
     })
 };
+
+export const getOrderByNumberRequest  = async (number: string): Promise<any> => {
+    return await fetch(`${BASE_URL}/orders/${number}`);
+}

@@ -45,7 +45,7 @@ const App = () => {
                     <Route path="/register" element={<OnlyUnAuth element={<Register />} />} />
                     <Route path='/profile/*' element={<OnlyAuth element={<Profile />} />} />
                     <Route path='/feed' element={<Feed/>}/>
-                    {/* <Route path='/feed/:number' element={<OrderCard/>}/> */}
+                    <Route path='/feed/:number' element={<OrderCard/>}/>
                     <Route path="/forgot-password" element={<OnlyUnAuth element={<ForgotPassword />} />} />
                     <Route path="/reset-password" element={<OnlyUnAuth element={<ResetPassword />} />} />
                     <Route path="/*" element={<PageNotFound />} />
@@ -63,6 +63,12 @@ const App = () => {
                     
                     <Route path="/feed/:number" element={
                         <Modal onClose={handleModalClose}>
+                            <OrderCard />
+                        </Modal>
+                    } />
+
+                    <Route path="/profile/orders/:number" element={
+                        <Modal  onClose={handleModalClose}>
                             <OrderCard />
                         </Modal>
                     } />

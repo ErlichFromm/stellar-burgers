@@ -67,3 +67,15 @@ export interface IOrder{
         price: number;
     }
 }
+
+export interface ISelectedOrder {
+    _id: string;
+    ingredients: Array<string>;
+    owner: string;
+    status: 'done' | 'pending' | 'created';
+    name: string;
+    createdAt: string;
+    updatedAt: string;
+    number: number;
+    __v: number; 
+}
