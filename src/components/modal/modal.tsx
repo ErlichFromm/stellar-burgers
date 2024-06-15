@@ -15,22 +15,18 @@ interface IModalProps{
 const Modal:React.FC<PropsWithChildren<IModalProps>> = (props) => {
 
     const {title, children, onClose} = props;
-
     useEffect(() => {
-
         const onEscapePressHandler = (e: KeyboardEvent) => {
             if(e.key === 'Escape'){
                 onClose();
             }
         }
-
         document.addEventListener('keydown', onEscapePressHandler);
 
         return () => {
             document.removeEventListener('keydown', onEscapePressHandler);
         };
     }, []);
-
    
     return ReactDOM.createPortal((
         <>

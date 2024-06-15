@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDrag } from "react-dnd";
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { useAppSelector } from '../../hooks/redux';
 
@@ -15,6 +15,7 @@ interface IIngredientCardProps{
 
 const IngredientCard:React.FC<IIngredientCardProps> = (props) => {
 
+    const location = useLocation();
     const {ingredient} = props;
 
     const {selectedIngredients, selectedBun} = useAppSelector((store) => store.ingredients);
@@ -44,7 +45,7 @@ const IngredientCard:React.FC<IIngredientCardProps> = (props) => {
     return (
         <Link id={ingredient._id} 
              to={`/ingredients/${ingredient._id}`}
-             state={'background'}
+             state={{background: location}}
              className={styles.card} 
              ref={dragRef}>
 

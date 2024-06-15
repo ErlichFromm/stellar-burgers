@@ -25,6 +25,7 @@ const App = () => {
     const dispatch = useAppDispatch();
     const location:any = useLocation();
     const navigate = useNavigate();
+    const background = location.state && location.state.background;
 
     useEffect(() => {
         dispatch(getIngredients());
@@ -37,14 +38,14 @@ const App = () => {
 
     return (
         <>
-            <Routes location={location.state === 'background' || location}>
+            <Routes location={background || location}>
                 <Route path="/" element={<Layout />}>
                     <Route index element={<Home />} />
                     <Route path="/sign-in" element={<OnlyUnAuth element={<SignIn />} />} />
                     <Route path="/register" element={<OnlyUnAuth element={<Register />} />} />
                     <Route path='/profile/*' element={<OnlyAuth element={<Profile />} />} />
                     <Route path='/feed' element={<Feed/>}/>
-                    <Route path='/feed/:number' element={<OrderCard/>}/>
+                    {/* <Route path='/feed/:number' element={<OrderCard/>}/> */}
                     <Route path="/forgot-password" element={<OnlyUnAuth element={<ForgotPassword />} />} />
                     <Route path="/reset-password" element={<OnlyUnAuth element={<ResetPassword />} />} />
                     <Route path="/*" element={<PageNotFound />} />
@@ -52,11 +53,17 @@ const App = () => {
                     <Route path='/profile/orders/:number' element={<OrderCard/>} />
                 </Route>
             </Routes>
-            {location.state === 'background' && (
+            {background && (
                 <Routes>
                     <Route path="/ingredients/:id" element={
                         <Modal title='Детали ингредиента' onClose={handleModalClose}>
                             <IndredientCard />
+                        </Modal>
+                    } />
+                    
+                    <Route path="/feed/:number" element={
+                        <Modal onClose={handleModalClose}>
+                            <OrderCard />
                         </Modal>
                     } />
                 </Routes>

@@ -42,8 +42,14 @@ export const socketMiddleware = (
     let socket: WebSocket | null = null;
 
     return (next) => (action) => {
-      next(action);
+      
+      // Проверка
+      console.log(action);
+
       if (!checkActionObject(action)) return;
+
+      // Проверка
+      console.log(action);
 
       const { dispatch } = store;
       const { type, payload } = action;
@@ -56,6 +62,7 @@ export const socketMiddleware = (
         onError,
         onMessage,
       } = wsActions;
+      
       if (!payload) return;
       if (type === wsInit) {
         socket = new WebSocket(payload);
@@ -91,6 +98,8 @@ export const socketMiddleware = (
       if (wsSendMessage && type === wsSendMessage && socket) {
         socket.send(JSON.stringify(payload));
       }
+
+      next(action);
     };
   };
 };

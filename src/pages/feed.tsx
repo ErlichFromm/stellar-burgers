@@ -4,14 +4,14 @@ import styles from './style.module.css';
 import { FEED_CONNECTION_INIT, FEED_CONNECTION_CLOSE } from '../services/actions/feed';
 import { WSS_URL } from '../services/api';
 
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import FeedCard from '../components/feed-card/feed-card';
 import { IOrderDetails } from '../types/index';
 
 const Feed: React.FC = () => {
 
     const dispatch = useAppDispatch();
-
+    const location = useLocation();
     const { total, totalToday, orders } = useAppSelector(store => store.feed);
     const { ingredients } = useAppSelector(store => store.ingredients);
 
@@ -22,6 +22,7 @@ const Feed: React.FC = () => {
         })
 
         return () => {
+            console.log('Зыкрыть соединение');
             dispatch({ type: FEED_CONNECTION_CLOSE })
         }
     }, [])
@@ -77,6 +78,7 @@ const Feed: React.FC = () => {
                     {normalizedData.map((order, index) => (
                         <Link
                             to={`/feed/${order.number}`}
+                            state={{background: location}}
                             key={order.number}
                             className={styles.feedLink}
                         >

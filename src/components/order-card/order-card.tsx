@@ -1,11 +1,15 @@
 import React, { useMemo } from 'react';
 import { useAppSelector } from '../../hooks/redux';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import styles from './order-card.module.css';
 import { IOrder, IIngredient } from '../../types/index';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 const OrderCard: React.FC = () => {
+    
+    // 'background || null'
+    const {state} = useLocation();
+    console.log(state);
     
     const {number} = useParams();
     const {orders} = useAppSelector(store => store.feed);
