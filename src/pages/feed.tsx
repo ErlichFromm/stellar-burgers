@@ -67,7 +67,7 @@ const Feed: React.FC = () => {
             }
         })
 
-    }, [ingredients, orders]);
+    }, [ingredients, orders, location]);
 
     return (
         <div className={`text ${styles.feedWrapper}`}>

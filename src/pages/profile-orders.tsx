@@ -63,7 +63,7 @@ const ProfileOrders: React.FC = () => {
                 status: order.status,
             }
         })
-    }, [orders, ingredients])
+    }, [orders, ingredients, location])
 
     return (
         <div className={styles.userOrder}>
