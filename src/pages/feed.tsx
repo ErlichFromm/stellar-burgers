@@ -22,10 +22,9 @@ const Feed: React.FC = () => {
         })
 
         return () => {
-            console.log('Зыкрыть соединение');
             dispatch({ type: FEED_CONNECTION_CLOSE })
         }
-    }, [])
+    }, [dispatch])
 
     // created | pending | done
     let done: Array<number> = [];
