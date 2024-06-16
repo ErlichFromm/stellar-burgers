@@ -21,7 +21,7 @@ export interface IInitialState {
     selectedOrderFailed: boolean;
 }
 
-const initialState: IInitialState = {
+export const initialState: IInitialState = {
     order: null,
     orderRequest: false,
     orderFailed:  false,

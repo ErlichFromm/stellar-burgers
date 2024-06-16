@@ -66,7 +66,7 @@ export interface IInitialState {
     resetPasswordFailed: boolean,
 }
 
-const initialState: IInitialState = {
+export const initialState: IInitialState = {
     user: {
         email: '',
         name: ''

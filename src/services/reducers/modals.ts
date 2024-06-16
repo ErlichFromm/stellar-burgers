@@ -10,7 +10,7 @@ export interface IInitialState {
     orderModalIsOpened: boolean;
 }
 
-const initialState: IInitialState = {
+export const initialState: IInitialState = {
     ingredientModalIsOpened: false,
     orderModalIsOpened:      false,
 }

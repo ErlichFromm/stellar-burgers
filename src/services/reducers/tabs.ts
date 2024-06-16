@@ -5,7 +5,7 @@ export interface IInitialState {
     selectedTab: 'bun' | 'sauce' | 'main'
 }
 
-const initialState: IInitialState = {
+export const initialState: IInitialState = {
     selectedTab: 'bun',
 }
 

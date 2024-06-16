@@ -48,6 +48,7 @@
     ]
   },
   "devDependencies": {
-    "@types/uuid": "^9.0.8"
+    "@types/uuid": "^9.0.8",
+    "jest": "^27.5.1"
   }
 }
