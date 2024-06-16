@@ -1,4 +1,5 @@
-import { IOrder } from '../types/index';
+import { IOrder, IIngredient, IIngredientUUID } from '../types/index';
+
 
 export const wsOrder: IOrder[] = [
     {
@@ -11,3 +12,71 @@ export const wsOrder: IOrder[] = [
         number: 42973,
     },
 ];
+
+export const ingredients: IIngredient[] = [
+    {
+        _id: '1',
+        name: 'name',
+        type: 'sauce',
+        proteins: 25,
+        fat: 3,
+        carbohydrates: 21,
+        calories: 124,
+        price: 500,
+        image: 'http://...',
+        image_mobile: 'http://...',
+        image_large: 'http://...',
+        __v: 0,
+    }
+]
+//  Ингредиенты с UUID
+
+export const ingredient1: IIngredientUUID = {
+    uuid: '1',
+    _id: '1',
+    name: 'name',
+    type: 'bun',
+    proteins: 25,
+    fat: 3,
+    carbohydrates: 21,
+    calories: 124,
+    price: 500,
+    image: 'http://...',
+    image_mobile: 'http://...',
+    image_large: 'http://...',
+    __v: 0,
+}
+
+export const ingredient2: IIngredientUUID = {
+    uuid: '2',
+    _id: '2',
+    name: 'name',
+    type: 'bun',
+    proteins: 25,
+    fat: 3,
+    carbohydrates: 21,
+    calories: 124,
+    price: 500,
+    image: 'http://...',
+    image_mobile: 'http://...',
+    image_large: 'http://...',
+    __v: 0,
+}
+
+export const ingredientsUUID: IIngredientUUID[] = [
+    {    uuid: '1',
+        _id: '1',
+        name: 'name',
+        type: 'sauce',
+        proteins: 25,
+        fat: 3,
+        carbohydrates: 21,
+        calories: 124,
+        price: 500,
+        image: 'http://...',
+        image_mobile: 'http://...',
+        image_large: 'http://...',
+        __v: 0,
+    },
+]
+
