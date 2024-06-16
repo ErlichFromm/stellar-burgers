@@ -1,4 +1,5 @@
-
+import { IIngredient, IIngredientUUID } from '../../types/index';
+import { TIngredientActions } from '../actions/ingredients';
 
 import {GET_INGREDIENT,
         GET_INGREDIENT_FAILED,
@@ -6,13 +7,26 @@ import {GET_INGREDIENT,
         SET_SELECTED_INGREDIENT_ID,
         ADD_INGREDINT,
         DELETE_INGREDIENT,
-        GROUPE_INGREDIENTS_BY_TYPE,
         CALC_INGREDIENT_COST,
         SWAP_INGREDIENTS} from '../actions/ingredients'
 
-const initialState = {
+
+export interface IInitialState {
+    ingredients: Array<IIngredient>;
+    ingredientsRequest: boolean;
+    ingredientsFailed: boolean;
+
+    selectedIngredientId: null;
+    selectedBun: IIngredient | undefined;
+    selectedIngredients: Array<IIngredientUUID>;
+
+    totalPrice: number;
+}
+
+
+
+const initialState: IInitialState = {
     ingredients: [],
-    ingredientsGroupes: {},
     ingredientsRequest: false,
     ingredientsFailed: false,
 
@@ -23,7 +37,7 @@ const initialState = {
     totalPrice: 0,
 }
 
-export const ingredientsReducer = (state = initialState, action) => {
+export const ingredientsReducer = (state = initialState, action: TIngredientActions) => {
     switch (action.type){
         case GET_INGREDIENT: {
             return {
@@ -51,24 +65,6 @@ export const ingredientsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 selectedIngredientId: action.payload,
-            }
-        };
-        case GROUPE_INGREDIENTS_BY_TYPE: {
-            const ingredientsGroupes = {
-                bun: [],
-                sauce: [],
-                main: []
-            }
-            
-            action.payload.forEach(ingredient => {
-                if(ingredientsGroupes[ingredient.type]){
-                    ingredientsGroupes[ingredient.type].push(ingredient);
-                }
-            });
-
-            return {
-                ...state,
-                ingredientsGroupes,
             }
         };
         case ADD_INGREDINT: {

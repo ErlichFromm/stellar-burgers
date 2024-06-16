@@ -1,8 +1,9 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../hooks/redux';
 import { Routes, Route, NavLink, useLocation } from 'react-router-dom';
 import { logout } from '../services/actions/user';
 import UpdateUser from './update-user';
+import ProfileOrders from '../pages/profile-orders';
 
 
 import styles from './style.module.css';
@@ -11,17 +12,12 @@ const setActive = ({ isActive }: {isActive:boolean}): string => isActive ? style
 
 const Profile:React.FC = () => {
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const location = useLocation();
 
     const logOutHandler = () => {
-        // @ts-ignore
         dispatch(logout())
     }
-
-    const history = (
-        <p>История</p>
-    );
 
     return (
         <div className={styles.profile}>
@@ -29,7 +25,7 @@ const Profile:React.FC = () => {
                 <NavLink to='/profile' className={setActive} end>
                     <div className={`text text_type_main-medium ${styles.menuItem}`}>Профиль</div>
                 </NavLink>
-                <NavLink to='/profile/history' className={setActive}>
+                <NavLink to='/profile/orders' className={setActive}>
                     <div className={`text text_type_main-medium ${styles.menuItem}`}>История заказов</div>
                 </NavLink>
                 <NavLink to='/sign-in' className={styles.menuLink} onClick={logOutHandler}>
@@ -46,7 +42,7 @@ const Profile:React.FC = () => {
             <div className={styles.content}>
                 <Routes>
                     <Route index element={<UpdateUser/>} />
-                    <Route path='history' element={history} />
+                    <Route path='orders' element={<ProfileOrders/>} />
                 </Routes>
             </div>
         </div>

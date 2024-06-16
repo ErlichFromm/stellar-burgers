@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import usePassword from '../hooks/usePassword';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './style.module.css';
@@ -8,10 +8,10 @@ import useForm from '../hooks/useForm';
 
 const UpdateUser:React.FC = () => {
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const [passType, icon, togglePass] = usePassword();
 
-    const { user } = useSelector((state:any) => state.user);
+    const { user } = useAppSelector((state) => state.user);
     const [isModified, setModified] = useState(false);
     const [form, handleInputChange, setValue] = useForm({
         name: user.name,
@@ -32,7 +32,6 @@ const UpdateUser:React.FC = () => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // @ts-ignore
         dispatch(updateUser(form))
     }
 

@@ -30,8 +30,43 @@ import {
     RESET_PASSWORD_REQUEST_FAILED
 } from '../actions/user';
 
+import { TUserActions } from '../actions/user';
+import { IUser } from '../../types/index';
 
-const initialState = {
+export interface IInitialState {
+    user: IUser
+    isAuth: boolean,
+    isAuthChecked: boolean,
+    userDataRequest: boolean,
+    userDataRequestSuccess: boolean,
+    userDataRequestFailed: boolean,
+
+    tokensRequest: boolean,
+    tokensRequestSuccess: boolean,
+    tokensRequestFailed: boolean,
+
+    loginRequest: boolean,
+    loginRequestSuccess: boolean,
+    loginRequestFailed: boolean,
+
+    forgotPassword: boolean,
+    forgotPasswordSuccess: boolean,
+    forgotPasswordFailed: boolean,
+
+    registerUser: boolean,
+    registerUserSuccess: boolean,
+    registerUserFailed: false,
+
+    updateUser: boolean,
+    updateUserSuccess: boolean,
+    updateUserFailed: boolean,
+
+    resetPassword: boolean,
+    resetPasswordSuccess: boolean,
+    resetPasswordFailed: boolean,
+}
+
+const initialState: IInitialState = {
     user: {
         email: '',
         name: ''
@@ -68,7 +103,7 @@ const initialState = {
 
 }
 
-export const userReducer = (state = initialState, action) => {
+export const userReducer = (state = initialState, action: TUserActions) => {
     switch (action.type) {
         case USER_DATA_REQUEST: {
             return {

@@ -1,11 +1,15 @@
 import { CHANGE_TAB } from "../actions/tabs"
+import { TTabsActions } from '../actions/tabs';
 
-const initialState = {
-    // selectedTab: 'bun | sauce | main',
+export interface IInitialState {
+    selectedTab: 'bun' | 'sauce' | 'main'
+}
+
+const initialState: IInitialState = {
     selectedTab: 'bun',
 }
 
-export const tabsReducer = (state = initialState, action) => {
+export const tabsReducer = (state = initialState, action: TTabsActions) => {
     switch(action.type){
         case CHANGE_TAB:{
             return {

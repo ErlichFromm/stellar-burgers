@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDrag } from "react-dnd";
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
-import { useSelector } from "react-redux";
+import { useAppSelector } from '../../hooks/redux';
 
 import { Counter, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
-import { IIngredient } from '../../types/request-types';
+import { IIngredient } from '../../types/index';
 
 import styles from "./ingredient-card.module.css"
 
@@ -15,9 +15,10 @@ interface IIngredientCardProps{
 
 const IngredientCard:React.FC<IIngredientCardProps> = (props) => {
 
+    const location = useLocation();
     const {ingredient} = props;
 
-    const {selectedIngredients, selectedBun} = useSelector((store:any) => store.ingredients);
+    const {selectedIngredients, selectedBun} = useAppSelector((store) => store.ingredients);
     const [ingredienCount, setIngredientCount] = useState(0);
  
 
@@ -36,7 +37,7 @@ const IngredientCard:React.FC<IIngredientCardProps> = (props) => {
                 setIngredientCount(0);
             }
         }else{
-            setIngredientCount(selectedIngredients.filter((selectedIngredient: IIngredient) => selectedIngredient._id === ingredient._id).length);
+            setIngredientCount(selectedIngredients.filter((selectedIngredient) => selectedIngredient._id === ingredient._id).length);
         } 
         
     }, [selectedBun, selectedIngredients])
@@ -44,7 +45,7 @@ const IngredientCard:React.FC<IIngredientCardProps> = (props) => {
     return (
         <Link id={ingredient._id} 
              to={`/ingredients/${ingredient._id}`}
-             state={'background'}
+             state={{background: location}}
              className={styles.card} 
              ref={dragRef}>
 

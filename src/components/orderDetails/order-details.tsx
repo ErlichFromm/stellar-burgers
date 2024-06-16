@@ -1,18 +1,20 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useAppSelector } from '../../hooks/redux';
 
 import styles from './order-details.module.css';
 import doneImgPath from '../../images/done.png';
 
 
 const OrderDetail:React.FC = () => {
-    const {order} = useSelector((store: any) => store.order);
+    const {order, orderRequest} = useAppSelector((store) => store.order);
 
     return (
         <div className={styles.order}>
-            {order ? (
+            {order && !orderRequest ? (
             <>
-                <div className={`text text_type_main-large ${styles.number}`}>{order.order.number}</div>
+                <div className={`text text_type_main-large ${styles.number}`}>
+                    {order.order.number}
+                </div>
                 <div className="text text_type_main-medium mb-15">идентификатор заказа</div>
                 <div className={styles.orderImg}>
                     <img src={doneImgPath} alt="Принят" />
