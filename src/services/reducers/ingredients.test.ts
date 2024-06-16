@@ -149,7 +149,6 @@ describe('ingredientsReducer', () => {
             totalPrice: 500
              
         }
-        console.log(newState, expectedState);
         
         expect(newState).toEqual(expectedState) ;
     });

@@ -13,7 +13,7 @@ describe("tabsReducer", () => {
             type: CHANGE_TAB,
             payload: 'bun'
         }
-        const newState = tabsReducer(undefined, action);
+        const newState = tabsReducer(initialState, action);
         const expectedState = {
             selectedTab: 'bun'
         }
