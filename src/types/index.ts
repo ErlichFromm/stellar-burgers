@@ -48,9 +48,9 @@ export interface IIngredientUUID extends IIngredient{
 }
 
 export interface IOrder{
-    success: boolean;
+    success?: boolean;
     name: string;
-    order: {
+    order?: {
         ingredients: Array<IIngredient>;
         _id: string;
         owner: {
