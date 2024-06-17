@@ -1,5 +1,13 @@
 # Getting Started with Create React App
 
+Ссылка сайта: https://erlichfromm.github.io/
+
+Для текстирования JEST
+# `npm run test`
+
+Для текстирования CYPRESS
+# `npm run test:cypress`
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
