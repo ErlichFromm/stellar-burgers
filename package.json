@@ -27,7 +27,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "test:cypress": "cypress open",
+    "test:cypress": "start-server-and-test start http://localhost:3000 cypress",
+    "cypress": "cypress open",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -51,6 +52,7 @@
   "devDependencies": {
     "@types/uuid": "^9.0.8",
     "cypress": "^13.11.0",
-    "jest": "^27.5.1"
+    "jest": "^27.5.1",
+    "start-server-and-test": "^2.0.4"
   }
 }

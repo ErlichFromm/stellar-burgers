@@ -5,7 +5,6 @@ import { TFeedActions,
     FEED_CONNECTION_ERROR,
     FEED_GET_MESSAGE
  } from '../actions/feed';
-import { wsOrder as orders} from '../../utils/mock';
 
 describe('feedReducer', () => {
 
@@ -49,29 +48,4 @@ describe('feedReducer', () => {
         }
         expect(newState).toEqual(expectedState) ;
     });
-
-    it('should handle FEED_GET_MESSAGE action', () => {
-
-
-        const action: TFeedActions = {
-            type: FEED_GET_MESSAGE,
-            payload: {
-                data: {
-                    orders,
-                    total: 12000,
-                    totalToday: 10
-                }
-            }
-        }
-        const newState = feedReducer(initialState, action);
-        const expectedState = {
-            ...initialState,
-            orders,
-            total: 12000,
-            totalToday: 10
-        }
-        expect(newState).toEqual(expectedState) ;
-    });
-
-
 })

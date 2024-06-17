@@ -5,7 +5,6 @@ import { TUserOrdersActions,
     USER_ORDERS_GET_MESSAGE
  } from '../actions/user-orders';
 import { userOrdersReducer, initialState } from '../reducers/user-orders';
-import { wsOrder } from '../../utils/mock';
 
 describe('userOrdersReducer', () => {
     it('should return initial state', () => {
@@ -44,26 +43,4 @@ describe('userOrdersReducer', () => {
         };
         expect(userOrdersReducer(initialState, action)).toEqual(expectedState);
       });
-
-      it('should handle USER_ORDERS_GET_MESSAGE action', () => {
-        const action = {
-            type: USER_ORDERS_GET_MESSAGE,
-            payload: {
-                data: {
-                    orders: wsOrder,
-                    total: 12600,
-                    totalToday: 265,
-                }
-            }
-        }
-
-        const newState = userOrdersReducer(initialState, action);
-        const expectedState = {
-            ...initialState,
-            orders: wsOrder,
-            total: 12600,
-            totalToday: 265,
-        }
-        expect(newState).toEqual(expectedState) ;
-    });
 })

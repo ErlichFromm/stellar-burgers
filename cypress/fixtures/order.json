@@ -1,0 +1,30 @@
+{ 
+    "success": true,
+    "name": "Флюоресцентный люминесцентный бургер",
+    "order": { 
+        "createdAt": "2024-06-17T11:23:53.226Z",
+        "name": "Флюоресцентный люминесцентный бургер",
+        "ingredients": {
+            "caloriries": 643,
+            "carbohydrates": 85,
+            "fat": 26,
+            "image": "https://code.s3.yandex.net/react/code/bun-01.png",
+            "image_large": "https://code.s3.yandex.net/react/code/bun-01-large.png",
+            "image_mobile": "https://code.s3.yandex.net/react/code/bun-01-mobile.png",
+            "name": "Флюоресцентная булка R2-D3",
+            "price": 988,
+            "proteins": 44,
+            "type": "bun",
+            "__v": 0,
+            "_id": "643d69a5c3f7b9001cfa093d"
+        },
+        "owner": {
+
+        },
+        "number": 43025,
+        "price": 2964,
+        "status": "done",
+        "updatedAt": "2024-06-17T11:23:53.610Z",
+        "_id": "66701cc9856777001bb1b878"
+    }
+ }

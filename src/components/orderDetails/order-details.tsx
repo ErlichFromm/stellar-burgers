@@ -10,7 +10,7 @@ const OrderDetail:React.FC = () => {
 
     return (
         <div className={styles.order}>
-            {order && !orderRequest ? (
+            {order ? (
             <>
                 <div className={`text text_type_main-large ${styles.number}`}>
                     {order.order.number}
